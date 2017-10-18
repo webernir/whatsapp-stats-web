@@ -50,12 +50,12 @@ export default class Main extends React.Component<MainProps, MainState> {
             </Box>
             <Box>
               <Columns>
-                <Column isSize={3}>
+                <Column isSize={4}>
                   <div style={{ maxHeight: "500px", overflow: "auto" }}>
                     <CountByUser items={this.state.countByUser} />
                   </div>
                 </Column>
-                <Column isSize={9}>
+                <Column isSize={8}>
                   <SimpleBarChart
                     data={this.state.countByUser.filter(
                       (t: UserCount) => t.count > 50

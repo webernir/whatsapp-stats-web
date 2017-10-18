@@ -7,9 +7,16 @@ export interface CountByUserProps {
   items: UserCount[];
 }
 
-const CountByUserItem = ({ item }: { item: UserCount }) => {
+const CountByUserItem = ({
+  item,
+  rating
+}: {
+  item: UserCount;
+  rating: number;
+}) => {
   return (
     <tr>
+      <td>{rating}</td>
       <td>{item.name}</td>
       <td>{numeral(item.count).format("0,0")}</td>
     </tr>
@@ -23,13 +30,14 @@ export default class CountByUser extends React.Component<CountByUserProps, {}> {
       <Table isBordered isStriped isNarrow>
         <thead>
           <tr>
+            <th>Rating</th>
             <th>Name</th>
             <th>Count</th>
           </tr>
         </thead>
         <tbody>
           {items.map((item, index) => (
-            <CountByUserItem key={index} item={item} />
+            <CountByUserItem key={index} rating={index + 1} item={item} />
           ))}
         </tbody>
       </Table>
