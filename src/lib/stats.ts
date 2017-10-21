@@ -1,4 +1,5 @@
 import { groupBy, sumBy } from "lodash";
+import * as moment from 'moment'
 
 export function splitLines(txt: string) {
   return txt.split("\n");
@@ -39,7 +40,8 @@ export function getCountByUser(lines: string[]) {
 }
 
 export function getTime(line: string) {
-  return line.substring(0, line.indexOf(" - "));
+  const parsed = line.substring(0, line.indexOf(" - "));
+  return moment(parsed);
 }
 
 export function getAction(line: string) {
@@ -60,7 +62,6 @@ export function getAction(line: string) {
 }
 
 export function getMember(line: string) {
- 
   const action = getAction(line);
   const stripped = line.substring(line.indexOf("- ") + 2);
   switch (action) {
