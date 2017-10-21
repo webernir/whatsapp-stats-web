@@ -1,4 +1,5 @@
-import { groupBy, sumBy, countBy, flatten, uniq } from "lodash";
+// import { groupBy, sumBy, countBy, flatten, uniq } from "lodash";
+import { groupBy, sumBy, countBy } from "lodash";
 import * as moment from "moment";
 import { Moment } from "moment";
 
@@ -76,22 +77,23 @@ export function getCountByHour(messages: Message[]): HourCount[] {
 }
 
 export function getWordCount(messages: Message[]): WordCount[] {
-  const members = uniq(flatten(messages.map(t => t.member.split(" "))));
-  const blackList = ["", "-", ...members];
-  console.log('blackList', blackList)
-  const allWords = flatten(messages.map(t => t.line.split(" "))).filter(
-    word => !blackList.some(t => t === word)
-  );
-  const countByWord = countBy(allWords);
-  const mapped = Object.keys(countByWord)
-    .map(key => ({
-      word: key,
-      count: countByWord[key]
-    }))
-    .sort((a, b) => b.count - a.count)
-    .filter((t, index) => index < 20);
-  console.log("allWords", mapped);
   return [];
+  // const members = uniq(flatten(messages.map(t => t.member.split(" "))));
+  // const blackList = ["", "-", ...members];
+  // console.log("blackList", blackList);
+  // const allWords = flatten(messages.map(t => t.line.split(" "))).filter(
+  //   word => !blackList.some(t => t === word)
+  // );
+  // const countByWord = countBy(allWords);
+  // const mapped = Object.keys(countByWord)
+  //   .map(key => ({
+  //     word: key,
+  //     count: countByWord[key]
+  //   }))
+  //   .sort((a, b) => b.count - a.count)
+  //   .filter((t, index) => index < 20);
+  // console.log("allWords", mapped);
+  // return [];
 }
 
 export function getCountByUser(lines: string[]): UserCount[] {
