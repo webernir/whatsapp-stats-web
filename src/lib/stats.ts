@@ -4,8 +4,8 @@ export function splitLines(txt: string) {
   return txt.split("\n");
 }
 
-export function getCountByUser(lines: string[]) {
-  let filtered = lines
+export function filterMemberActivity(lines: string[]) {
+  return lines
     .filter(line => !line.includes("group"))
     .filter(line => !line.includes("removed"))
     .filter(line => !line.includes("left"))
@@ -14,17 +14,19 @@ export function getCountByUser(lines: string[]) {
     .filter(line => !line.includes("joined"))
     .filter(line => line.includes(":", line.indexOf(":") + 1))
     .filter(line => line.substring(0, 5).includes("/"));
+}
 
-  let items = filtered.map((line, index) => ({
+export function mapMemberTimeMessage(line: string, index: number) {
+  return {
     time: getTime(line),
-    member: line.substring(
-      line.indexOf("- ") + 2,
-      line.indexOf(":", line.indexOf("- "))
-    ),
+    member: getMember(line),
     index,
     line
-  }));
+  };
+}
 
+export function getCountByUser(lines: string[]) {
+  let items = filterMemberActivity(lines).map(mapMemberTimeMessage);
   let grouped = groupBy(items, "member");
 
   let result = Object.keys(grouped)
@@ -58,6 +60,7 @@ export function getAction(line: string) {
 }
 
 export function getMember(line: string) {
+ 
   const action = getAction(line);
   const stripped = line.substring(line.indexOf("- ") + 2);
   switch (action) {
@@ -70,6 +73,11 @@ export function getMember(line: string) {
     case "removed":
       return stripped.substring(
         stripped.indexOf("removed") + "removed ".length
+      );
+    case "message":
+      return line.substring(
+        line.indexOf("- ") + 2,
+        line.indexOf(":", line.indexOf("- "))
       );
     default:
       return undefined;
