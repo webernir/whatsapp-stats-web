@@ -1,11 +1,12 @@
 import * as React from "react";
+import { Columns, Column, Label, Box } from "bloomer";
+import { sumBy } from "lodash";
+import * as numeral from "numeral";
 import FileSelector from "../components/FileSelector";
 import { getCountByUser, splitLines } from "../lib/stats";
 import CountByUser from "../components/CountByUser";
 import SimpleBarChart from "../components/SimpleBarChart";
-import { Columns, Column, Label, Box } from "bloomer";
-import { sumBy } from "lodash";
-import * as numeral from 'numeral'
+import Instructions from "../components/Instructions";
 
 export interface MainProps {}
 export interface MainState {
@@ -40,7 +41,7 @@ export default class Main extends React.Component<MainProps, MainState> {
     return (
       <div>
         <FileSelector onContent={this.handleContent} />
-        {this.state.countByUser.length > 0 && (
+        {this.state.countByUser.length > 0 ? (
           <div>
             <Box>
               <Label>Total Message Count:</Label>
@@ -65,6 +66,8 @@ export default class Main extends React.Component<MainProps, MainState> {
               </Columns>
             </Box>
           </div>
+        ) : (
+          <Instructions />
         )}
       </div>
     );

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Label, Field, Control } from "bloomer";
+import { Label, Field, Control, Box } from "bloomer";
 
 export interface FileSelectorProps {
   onContent: (content: string) => void;
@@ -37,21 +37,23 @@ export default class FileSelector extends React.Component<
 
   render() {
     return (
-      <Field>
-        <Label>Choose a file:</Label>
-        <Control>
-          <input
-            multiple
-            type="file"
-            accept=".txt"
-            onChange={e => {
-              if (e.target.files) {
-                this.handleChange(e.target.files);
-              }
-            }}
-          />
-        </Control>
-      </Field>
+      <Box>
+        <Field>
+          <Label>Choose a file:</Label>
+          <Control>
+            <input
+              multiple
+              type="file"
+              accept=".txt"
+              onChange={e => {
+                if (e.target.files) {
+                  this.handleChange(e.target.files);
+                }
+              }}
+            />
+          </Control>
+        </Field>
+      </Box>
     );
   }
 }
