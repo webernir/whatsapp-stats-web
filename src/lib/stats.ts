@@ -1,5 +1,21 @@
 import { groupBy, sumBy } from "lodash";
-import * as moment from 'moment'
+import * as moment from "moment";
+import { Moment } from "moment";
+
+export class Message {
+  time: Moment;
+  member: string;
+  index: number;
+  line: string;
+}
+
+export enum MemberAction {
+  message,
+  joined,
+  added,
+  left,
+  removed
+}
 
 export function splitLines(txt: string) {
   return txt.split("\n");
@@ -17,7 +33,7 @@ export function filterMemberActivity(lines: string[]) {
     .filter(line => line.substring(0, 5).includes("/"));
 }
 
-export function mapMemberTimeMessage(line: string, index: number) {
+export function mapMemberTimeMessage(line: string, index: number): Message {
   return {
     time: getTime(line),
     member: getMember(line),
@@ -44,20 +60,20 @@ export function getTime(line: string) {
   return moment(parsed);
 }
 
-export function getAction(line: string) {
+export function getAction(line: string): MemberAction {
   if (line.includes("joined")) {
-    return "joined";
+    return MemberAction.joined;
   }
   if (line.includes("added")) {
-    return "added";
+    return MemberAction.added;
   }
   if (line.includes("left")) {
-    return "left";
+    return MemberAction.left;
   }
   if (line.includes("removed")) {
-    return "removed";
+    return MemberAction.removed;
   } else {
-    return "message";
+    return MemberAction.message;
   }
 }
 
@@ -65,35 +81,35 @@ export function getMember(line: string) {
   const action = getAction(line);
   const stripped = line.substring(line.indexOf("- ") + 2);
   switch (action) {
-    case "joined":
+    case MemberAction.joined:
       return stripped.substring(0, stripped.indexOf("joined") - 1);
-    case "added":
+    case MemberAction.added:
       return stripped.substring(stripped.indexOf("added") + "added ".length);
-    case "left":
+    case MemberAction.left:
       return stripped.substring(0, stripped.indexOf("left") - 1);
-    case "removed":
+    case MemberAction.removed:
       return stripped.substring(
         stripped.indexOf("removed") + "removed ".length
       );
-    case "message":
+    case MemberAction.message:
       return line.substring(
         line.indexOf("- ") + 2,
         line.indexOf(":", line.indexOf("- "))
       );
     default:
-      return undefined;
+      return "unknwon";
   }
 }
 
-function getActionValue(action: string) {
+function getActionValue(action: MemberAction) {
   switch (action) {
-    case "joined":
+    case MemberAction.joined:
       return 1;
-    case "added":
+    case MemberAction.added:
       return 1;
-    case "left":
+    case MemberAction.left:
       return -1;
-    case "removed":
+    case MemberAction.removed:
       return -1;
     default:
       return 0;
