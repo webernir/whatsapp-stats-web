@@ -9,7 +9,7 @@ import {
   Bar,
   ResponsiveContainer
 } from "recharts";
-import { UserCount } from "../containers/Main";
+import { UserCount } from "../lib/stats";
 
 export interface SimpleBarChartProps {
   data: UserCount[];

@@ -17,6 +17,11 @@ export enum MemberAction {
   removed
 }
 
+export type UserCount = {
+  name: string;
+  count: number;
+};
+
 export function splitLines(txt: string) {
   return txt.split("\n");
 }
@@ -42,7 +47,7 @@ export function mapMemberTimeMessage(line: string, index: number): Message {
   };
 }
 
-export function getCountByUser(lines: string[]) {
+export function getCountByUser(lines: string[]): UserCount[] {
   let items = filterMemberActivity(lines).map(mapMemberTimeMessage);
   let grouped = groupBy(items, "member");
 
@@ -50,7 +55,12 @@ export function getCountByUser(lines: string[]) {
     .map(gr => ({ member: gr, count: grouped[gr].length }))
     .sort((a, b) => b.count - a.count);
 
-  let output = result.map(item => `${item.member},${item.count}\r\n`);
+  const toUserCount = (item: string): UserCount => {
+    const [name, count] = item.split(",");
+    return { name, count: parseInt(count) };
+  };
+
+  let output = result.map(item => `${item.member},${item.count}\r\n`).map(toUserCount);
 
   return output;
 }

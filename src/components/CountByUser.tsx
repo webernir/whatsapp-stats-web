@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Table } from "bloomer";
-import { UserCount } from "../containers/Main";
 import * as numeral from "numeral";
+import { UserCount } from "../lib/stats";
 
 export interface CountByUserProps {
   items: UserCount[];

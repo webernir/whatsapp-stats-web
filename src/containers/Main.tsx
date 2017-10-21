@@ -3,7 +3,7 @@ import { Columns, Column, Label, Box } from "bloomer";
 import { sumBy } from "lodash";
 import * as numeral from "numeral";
 import FileSelector from "../components/FileSelector";
-import { getCountByUser, splitLines } from "../lib/stats";
+import { getCountByUser, splitLines, UserCount } from "../lib/stats";
 import CountByUser from "../components/CountByUser";
 import SimpleBarChart from "../components/SimpleBarChart";
 import Instructions from "../components/Instructions";
@@ -14,11 +14,6 @@ export interface MainState {
   countByUser: UserCount[];
 }
 
-export type UserCount = {
-  name: string;
-  count: number;
-};
-
 export default class Main extends React.Component<MainProps, MainState> {
   state = {
     content: "",
@@ -26,14 +21,10 @@ export default class Main extends React.Component<MainProps, MainState> {
   };
 
   handleContent = (content: string) => {
-    const toUserCount = (item: string): UserCount => {
-      const [name, count] = item.split(",");
-      return { name, count: parseInt(count) };
-    };
-
+   
     this.setState({
       content,
-      countByUser: getCountByUser(splitLines(content)).map(toUserCount)
+      countByUser: getCountByUser(splitLines(content))
     });
   };
 
