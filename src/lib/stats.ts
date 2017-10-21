@@ -1,4 +1,4 @@
-import { groupBy, sumBy } from "lodash";
+import { groupBy, sumBy, countBy } from "lodash";
 import * as moment from "moment";
 import { Moment } from "moment";
 
@@ -22,6 +22,11 @@ export type UserCount = {
   count: number;
 };
 
+export type HourCount = {
+  hour: number;
+  count: number;
+};
+
 export function splitLines(txt: string) {
   return txt.split("\n");
 }
@@ -35,7 +40,15 @@ export function filterMemberActivity(lines: string[]) {
     .filter(line => !line.includes("changed"))
     .filter(line => !line.includes("joined"))
     .filter(line => line.includes(":", line.indexOf(":") + 1))
-    .filter(line => line.substring(0, 5).includes("/"));
+    .filter(
+      line =>
+        line.substring(0, 5).includes("/") || line.substring(0, 5).includes(".")
+    );
+}
+
+export function parseMessages(content: string): Message[] {
+  return splitLines(content)
+    .map(mapMemberTimeMessage);
 }
 
 export function mapMemberTimeMessage(line: string, index: number): Message {
@@ -45,6 +58,17 @@ export function mapMemberTimeMessage(line: string, index: number): Message {
     index,
     line
   };
+}
+
+export function getCountByHour(messages: Message[]): HourCount[] {
+  const mapped = messages
+    .map(t => ({ ...t, hour: t.time.hour() }))
+    .filter(t => t.hour >= 0 && t.hour <= 24);
+  const grouped = countBy(mapped, "hour");
+  return Object.keys(grouped).map(t => ({
+    hour: parseInt(t),
+    count: parseInt(grouped[t].toString())
+  }));
 }
 
 export function getCountByUser(lines: string[]): UserCount[] {
@@ -60,14 +84,18 @@ export function getCountByUser(lines: string[]): UserCount[] {
     return { name, count: parseInt(count) };
   };
 
-  let output = result.map(item => `${item.member},${item.count}\r\n`).map(toUserCount);
+  let output = result
+    .map(item => `${item.member},${item.count}\r\n`)
+    .map(toUserCount);
 
   return output;
 }
 
 export function getTime(line: string) {
   const parsed = line.substring(0, line.indexOf(" - "));
-  return moment(parsed);
+  const isHebrewLocale = parsed.includes(".");
+  const format = isHebrewLocale ? "DD-MM-YYYY, HH:mm" : "MM-DD-YYYY, HH:mm";
+  return moment(parsed, format);
 }
 
 export function getAction(line: string): MemberAction {
