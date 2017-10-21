@@ -12,6 +12,9 @@ export default class Instructions extends React.Component<
       <Content>
         <Box>
           <h3>Getting Started:</h3>
+          <strong>Your chat history is safe!</strong>
+          <span>&nbsp; it's not uploaded to anywehere.</span>
+          <hr />
           <p>
             To export a copy of the history of an individual chat or group, use
             the Email chat feature:
@@ -23,8 +26,8 @@ export default class Instructions extends React.Component<
             <li>Tap Email chat.</li>
             <li>Choose whether to Attach Media or not.</li>
             <li>
-              An email will be composed with your chat history attached as a
-              .txt document.
+              An email will be composed with your chat history attached as a 
+              <code>.txt</code> document.
             </li>
           </ol>
         </Box>
