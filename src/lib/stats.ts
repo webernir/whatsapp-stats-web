@@ -1,4 +1,4 @@
-import { groupBy, sumBy, countBy } from "lodash";
+import { groupBy, sumBy, countBy, flatten, uniq } from "lodash";
 import * as moment from "moment";
 import { Moment } from "moment";
 
@@ -27,6 +27,11 @@ export type HourCount = {
   count: number;
 };
 
+export type WordCount = {
+  word: string;
+  count: number;
+};
+
 export function splitLines(txt: string) {
   return txt.split("\n");
 }
@@ -47,8 +52,7 @@ export function filterMemberActivity(lines: string[]) {
 }
 
 export function parseMessages(content: string): Message[] {
-  return splitLines(content)
-    .map(mapMemberTimeMessage);
+  return splitLines(content).map(mapMemberTimeMessage);
 }
 
 export function mapMemberTimeMessage(line: string, index: number): Message {
@@ -69,6 +73,25 @@ export function getCountByHour(messages: Message[]): HourCount[] {
     hour: parseInt(t),
     count: parseInt(grouped[t].toString())
   }));
+}
+
+export function getWordCount(messages: Message[]): WordCount[] {
+  const members = uniq(flatten(messages.map(t => t.member.split(" "))));
+  const blackList = ["", "-", ...members];
+  console.log('blackList', blackList)
+  const allWords = flatten(messages.map(t => t.line.split(" "))).filter(
+    word => !blackList.some(t => t === word)
+  );
+  const countByWord = countBy(allWords);
+  const mapped = Object.keys(countByWord)
+    .map(key => ({
+      word: key,
+      count: countByWord[key]
+    }))
+    .sort((a, b) => b.count - a.count)
+    .filter((t, index) => index < 20);
+  console.log("allWords", mapped);
+  return [];
 }
 
 export function getCountByUser(lines: string[]): UserCount[] {

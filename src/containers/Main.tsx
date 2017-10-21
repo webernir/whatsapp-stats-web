@@ -9,8 +9,10 @@ import {
   splitLines,
   UserCount,
   getCountByHour,
+  getWordCount,
   HourCount,
-  Message
+  Message,
+  WordCount
 } from "../lib/stats";
 import CountByUser from "../components/CountByUser";
 import SimpleBarChart from "../components/SimpleBarChart";
@@ -23,6 +25,7 @@ export interface MainState {
   messages: Message[];
   countByUser: UserCount[];
   countByHour: HourCount[];
+  wordCount: WordCount[];
 }
 
 export default class Main extends React.Component<MainProps, MainState> {
@@ -30,7 +33,8 @@ export default class Main extends React.Component<MainProps, MainState> {
     content: "",
     messages: [],
     countByUser: [],
-    countByHour: []
+    countByHour: [],
+    wordCount: []
   };
 
   handleContent = (content: string) => {
@@ -39,7 +43,8 @@ export default class Main extends React.Component<MainProps, MainState> {
       content,
       messages,
       countByUser: getCountByUser(splitLines(content)),
-      countByHour: getCountByHour(messages)
+      countByHour: getCountByHour(messages),
+      wordCount: getWordCount(messages)
     });
   };
 
