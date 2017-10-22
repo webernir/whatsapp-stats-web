@@ -1,0 +1,751 @@
+8/13/17, 18:34 - Messages to this group are now secured with end-to-end encryption. Tap for more info.
+8/13/17, 18:34 - You created group "DevHelps - professionals"
+8/13/17, 18:40 - אופיר גרדי changed this group's icon
+8/13/17, 20:17 - You removed אופיר גרדי
+8/13/17, 20:23 - You revoked this group's invite link. Tap to view the new invite link.
+8/13/17, 21:31 - You added בנימין גרינבוים
+8/13/17, 21:36 - You added ניר זלוף
+8/13/17, 21:36 - You added שלומי זק
+8/13/17, 21:36 - You added ליאור אלקיים
+8/13/17, 21:36 - You added גיל תייר
+8/13/17, 21:37 - You added עידו זק
+8/13/17, 21:37 - You added דור צ'יזיק
+8/13/17, 21:37 - You added אביעד מוזס
+8/13/17, 21:42 - בנימין גרינבוים: מי רוצה treat js נחמד :)?
+8/13/17, 21:43 - Nir Weber: בכיף :)
+רק צריך להוסיף עוד חבר'ה
+8/13/17, 21:43 - You added אורי טליוסף
+8/13/17, 22:01 - You added מקס צ'רנין
+8/13/17, 22:04 - You added דן ספרזאדה
+8/13/17, 22:08 - You added סבסטיאן פרדיבה
+8/13/17, 22:09 - You added ישי ויזנר
+8/13/17, 22:11 - You added נדב ברוכיאל
+8/13/17, 22:13 - You added ניר נוי
+8/13/17, 22:17 - You added זאב קלוזנר
+8/13/17, 22:18 - You added ניקולאי ריבל
+8/13/17, 22:19 - You added אלי מרמור
+8/13/17, 22:20 - You added ניר אברהם
+8/13/17, 22:21 - You added פיני פז
+8/13/17, 22:25 - You added דוד חזני
+8/13/17, 22:26 - You added מנחם ציקואשוולי
+8/13/17, 22:33 - You added מיכאל הברמן
+8/13/17, 22:37 - You added יוסי בודייר
+8/13/17, 22:41 - בנימין גרינבוים: בוא לא נוסיף המון אנשים?
+8/13/17, 22:41 - בנימין גרינבוים: נגיד, עכשיו אנחנו ב25, בוא נהיה יותר סלקטיביים ב30?
+8/13/17, 22:42 - Nir Weber: קול.
+המטרה לסנן רעשי רקע ולהגיע לאליטה. 
+אני מוסיף חבר'ה שאני מכיר אישית את הנסיון, וכאלו שפנה אליי בפרטי וסיפרו רקע על עצמם שנראה רלוונטי.
+8/13/17, 22:43 - בנימין גרינבוים: סבבה לגמרי
+8/13/17, 22:49 - סבסטיאן פרדיבה: מסכים לגמרי. תודה שוב פעם
+8/13/17, 22:51 - You added תמר ליטבק
+8/13/17, 22:51 - You added אלירן אזולאי
+8/13/17, 22:58 - You added שוקי קורנט
+8/13/17, 23:16 - ניקולאי ריבל: Phew, I made the cut 😅
+8/13/17, 23:17 - ניקולאי ריבל: ניר, תיארתי לאנשים שאתה מרכיב צוות כמו ב heroes 🤓
+8/13/17, 23:20 - Nir Weber: <Media omitted>
+8/13/17, 23:20 - ניר נוי: <Media omitted>
+8/13/17, 23:21 - בנימין גרינבוים: That .tap should just be a `.delay(1)` - also that code shouldn't leak.
+8/13/17, 23:22 - בנימין גרינבוים: Are you sure you're not running the debug build with long stack traces turned on? Is process.env.NODE_ENV set to 'production'?
+8/13/17, 23:22 - בנימין גרינבוים: With long stack traces, bluebird has to stitch the entire call stack (we do that forever). You can also try with native promises (although that would probably leak for real - unless you're running a Node nightly)
+8/13/17, 23:22 - ניר נוי: Ahhmmm not sure.. Dont have all the details
+8/13/17, 23:23 - ניר נוי: there seems to be an interesting issue where a promise loop (a promise that schedules itself as a continuation) is causing a memory leak. Looking at heap snapshots, I don't see anything meaningful; specifically, the "new Array(1000)" objects don't seem to be causing the memory increase. We know it's a memory leak because if the heap size is artificially limited (e.g. to 20MB) the process eventually runs out of heap and crashes.
+
+
+Do you have an idea what might be causing this leak with the promises "loop"? Or, if there is a reliable workaround that allows a promise to schedule itself as a continuation?
+8/13/17, 23:23 - בנימין גרינבוים: We have a test for a very similar case, I doubt Bluebird leaks here.
+8/13/17, 23:23 - ניר נוי: This the email he sent us
+8/13/17, 23:23 - בנימין גרינבוים: Tell the CTO dude he's welcome to talk to me about bluebird leaking - if it's a real leak we want to know. Although the code above in isolation doesn't leak.
+8/13/17, 23:24 - בנימין גרינבוים: Also needed: node version and bluebird version, and hopefully a crash core dump with the out of memory
+8/13/17, 23:27 - ניר נוי: Can i add you to the email conversation?
+8/13/17, 23:27 - ניר נוי: With the guy who reported this
+8/13/17, 23:27 - בנימין גרינבוים: Sure, to benjamingr@gmail.com - he's also welcome to open an issue at the repo
+8/13/17, 23:36 - דוד פרנקל joined using this group's invite link
+8/13/17, 23:42 - ניר נוי: Thx, sent an email.
+8/14/17, 07:59 - You added בנימין גלינסקי
+8/14/17, 08:16 - You added עומר בורשטיין
+8/14/17, 08:25 - שחר אור joined using this group's invite link
+8/14/17, 09:53 - בנימין גרינבוים added דניאל חנקין, ניצן עוזיאלי
+8/14/17, 10:31 - ליאור אלקיים: בוקר טוב לכולם. תודה על היוזמה!
+8/14/17, 10:45 - Nir Weber: בכיף. בוקר טוב :)
+8/14/17, 10:54 - אייל ישראלי joined using this group's invite link
+8/14/17, 12:17 - דניאל סלוצקי joined using this group's invite link
+8/14/17, 14:06 - ניקולאי ריבל: ok, i've got a question for this forum! :) has anyone here tried customizing a create-react-app based project without ejecting? specifically, i need to customize babel or webpack (which calls babel, doh). i know the obvious reply is "you can't, by design - you need to eject", but my question is exactly that. how do i eat the cake and keep it whole?
+8/14/17, 14:07 - שחר אור: Ejecting sucks. How about https://github.com/mozilla-neutrino/neutrino-dev/tree/master/packages/neutrino ?
+8/14/17, 14:07 - שחר אור: https://neutrino.js.org/
+8/14/17, 14:08 - דניאל חנקין: 1) Fork the project, add what you need, maintain fork.
+2) Change what you need directly by string replacing the needed locations in node_modules.
+3) Use a different boilerplate that offers that, supposedly neutrino?
+4) Tell us more about your problem, so we won't be offering you an X solution when you have a Y problem.
+8/14/17, 14:08 - אורי טליוסף: Creating your own git branch?
+8/14/17, 14:09 - ניקולאי ריבל: The decision is to use CRA - that won't change, so not looking for alternatives :/
+8/14/17, 14:10 - שחר אור: I love decisions.
+8/14/17, 14:11 - Nir Weber: מגניב זה
+8/14/17, 14:12 - ניקולאי ריבל: Forking is a crappy option: you need to maintain it all the time. I'm doing simple changes - specifically adding babel plugins - ideally i need a hook to override the upstream project settings.
+8/14/17, 14:13 - דניאל חנקין: Also working with "decisions", but I wouldn't immediately cross that off my life. Babel plugins sounds like something that would be configurable via .babelrc. Does CRA read it or use { options: } to pass babel stuff?
+8/14/17, 14:14 - ניקולאי ריבל: all programmatically and no hooks
+8/14/17, 14:16 - דניאל חנקין: https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/config/webpack.config.dev.js#L176 sounds as simple as changing that line to false.
+8/14/17, 14:16 - דניאל חנקין: to true* 😅😂
+8/14/17, 14:24 - בנימין גרינבוים: What's so bad about ejecting?
+8/14/17, 14:24 - שחר אור: I've seen a CRA ejaculate. I didn't like it.
+8/14/17, 14:25 - ניר אברהם: שווה לבדוק create react app custom script
+8/14/17, 14:28 - ניקולאי ריבל: thanks, i don't like it - can do something better myself. a similar option is https://github.com/timarney/react-app-rewired
+8/14/17, 14:30 - בנימין גרינבוים: What's so bad about ejecting? Ejecting is fine.
+8/14/17, 14:30 - ניקולאי ריבל: CRA is progressing very rapidly. it has existed for merely a year and in that time added a ton of awesome. i want to be able to keep up with it's pace of innovation - without the headache of figuring out how to upgrade manually after ejecting
+8/14/17, 14:31 - בנימין גרינבוים: Upgrade what? Just update the npm packages - it's just Webpack (2 and 3 are very similar anyway), some CSS pipeline (postcss) and a transpiler
+8/14/17, 14:32 - ניקולאי ריבל: === half a day of work
+8/14/17, 14:32 - בנימין גרינבוים: Updating it is not "half a day of work".
+8/14/17, 14:32 - ניקולאי ריבל: of someone who's knowledgeable in all of the above
+8/14/17, 14:33 - ניקולאי ריבל: with CRA, i can tell a monkey to upgrade and it'll just work :p
+8/14/17, 14:33 - ניקולאי ריבל: it is, once you've ejected and have to maintain a ton of packages
+8/14/17, 14:34 - בנימין גרינבוים: What? If it's all between minors then yes - if it's not then no it's not.
+8/14/17, 14:35 - בנימין גרינבוים: That is, updating a React build ( a relatively small one which CRA is even an option for) is easy, if your build is big with a lot of advanced features CRA is not a real option anyway
+8/14/17, 14:36 - ניקולאי ריבל: part of the idea is that too: not allow to easily add crazy shit. keep it simple
+8/14/17, 14:37 - ניקולאי ריבל: i'm leaning towards a postinstall script
+8/14/17, 15:05 - ניקולאי ריבל: Or this: https://github.com/glenjamin/hack-react-app/commit/e8c6effbabd1d41630163fc4758fdac219f9be8b
+8/14/17, 16:06 - בנימין גלינסקי: It took me about 5 days to understand that eject is must for non trivial project. 
+It just that they are trying to scare you not to eject 👹
+8/14/17, 16:07 - בנימין גרינבוים: Yeah, they're definitely trying to scare you of ejecting
+8/15/17, 09:40 - דניאל סלוצקי left
+8/15/17, 16:41 - בנימין גרינבוים: https://twitter.com/umaar/status/897408737694109697
+8/15/17, 16:42 - Nir Weber: cool!.
+means i can use _await_ directly in an `index.js` without wrapping it into a _async_ function.
+always was wierd to me i couldn't.
+8/15/17, 16:43 - Nir Weber: @972547238288 is it an issue you filed?
+8/15/17, 16:44 - בנימין גרינבוים: Still stuck in Node unfortunately https://github.com/nodejs/node/issues/13209
+8/15/17, 16:44 - בנימין גרינבוים: Although the crbug and review are interesting and are worth a read anyway
+8/15/17, 16:45 - Nir Weber: oh. so it's only in Chrome DevTools at the moment. bummer :(
+8/15/17, 17:00 - דניאל חנקין: Very cool.
+8/15/17, 18:11 - בנימין גרינבוים: Great news Node.js people! https://twitter.com/bmeurer/status/896996151731343361
+8/15/17, 18:11 - בנימין גרינבוים: (He's the guy who wrote the new compiler!)
+8/16/17, 09:19 - דוד חזני: יעצתי לחברה בטחונית (אני מציין את זה כדי שתתחשבו בהגבלות הטכנולוגיה ובזה שהם מחזיקים שרתים ולא משלמים לפי CPU).
+יש להם כיום מערכת שמייצרת מספרים ראשוניים שנכתבה לפני יותר מעשור.
+הארכיטקטורה שלה בנויה ממספר שרתים שמייצרים ראשוניים בגדלים מסוימים (32-8192 ביט, בשלב זה) ושומרים אותם בDB קבצים מקומי.
+כמו כן ישנו שרת "מתווך" , שרת שיודע לקשר בין בקשה לראשוני בגודל מסויים לבין אינסטנס כלשהו של שרת שמייצר ראשוני בגודל כזה, הוא שולח למבקש את הכתובת של האינסטנס ומשם התקשורת היא P2P.
+המתווך מכיר בקונפיגורציה את הכתובת של כל אינסטנס.
+כל התקשורת בארכיטקטורה הזאת מבוססת JAVA RMI.
+הדרישה החשובה ביותר של המערכת הזאת היא שמספר ראשוני יהיה ייחודי. (אסור ששני בקשות יקבלו את אותו ראשוני)
+בגלל שהם עובדים עם java וopenshift מה שהצעתי להם הוא רעיון של לעשות שרת מרכזי עם DB ששומר את כל הראשוניים ונותן אותם לפי בקשה.
+כמו כן, הוא ידע כמה ראשוניים הוא צריך וידע להרים workers לפי הbalance של הראשונים בDB שלו.
+וכמובן שהתקשורת תהיה https
+8/16/17, 09:20 - דוד חזני: מקווה שהסברתי את עצמי טוב, אני פחות טוב בלי דף ועט / לוח וטושים 😜
+מה דעתכם?
+8/16/17, 09:22 - אורי טליוסף: כל מספר ראשוני יכול להשלח פעם אחת ביום? בשנה? לנצח?
+8/16/17, 09:23 - דוד חזני: לנצח, מוחק אותו מהDB באותה טרנזקציה ששלפתי אותו.
+8/16/17, 09:25 - ישי ויזנר: מה קצב הבקשה של המספרים? כמה בדקה?
+8/16/17, 09:25 - אורי טליוסף: ואם הוא מיוצר שוב ע"י worker ?
+8/16/17, 09:25 - ישי ויזנר: אני לא יודע איך הם מייצרים את המספרים הראשוניים, אבל אין סיכוי שהם ייצרו את אותו המספר פעמיים?
+8/16/17, 09:26 - דוד חזני: כרגע לא הרבה, יש תקופות שיותר ויש תקופות שפחות. אבל בכל מקרה זה לא נחשב סדר גודל רציני בכלל
+8/16/17, 09:28 - דוד חזני: כל הworker שואבים רחש גולמי וממנו מייצרים את הראשוני. בקטע הזה הם מכוסים ממש טוב.
+8/16/17, 09:28 - דוד חזני: שום סיכוי
+8/16/17, 09:32 - ישי ויזנר: רק לוודא- אין לך תלות במאפיינים הפיזיים של השרת לקליטת הרחשים? אם יהיו שני תהליכים על אותו השרת / שתי מכונות וירטואליות על אותו שרת פיזי זה לא יפגע ברמת החלקות של הrandom?
+8/16/17, 09:33 - דוד חזני: לא, הם צורכים רחש ממכונות יעודיות חיצוניות.
+8/16/17, 09:33 - דוד חזני: כמו שאמרתי, בקטע הזה בדקתי והם מכוסים ברמה מאוד גבוהה.
+8/16/17, 09:34 - דוד חזני: תודה על העזרה, אגב
+8/16/17, 09:38 - ישי ויזנר: אז מה שאתה מנסה להרוויח פה זה לחסוך משאבים ולא להחזיק מלא instanceים סתם? כי אתה משלם פה בזה שאתה יוצר single point of failure ושאתה מוריד את רמת הסקלאביליות שלך.
+הראשון יכול להיות פחות משמעותי אם יש למערכות אמינות ממש ממש גבוהה והשני יכול להיות פחות משמעותי אם כמעט בוודאות לא יצטרכו ייצור בסדרי גודל הרבה יותר גדולים, אבל זה עדיין משהו שצריך לקחת בחשבון...
+8/16/17, 10:32 - דוד חזני: אפשר לעשות scale לשרת המרכזי כשהDB משותף ובכך להקטין את הסיכוי לנקודת כשלון יחידה.
+8/16/17, 10:33 - ישי ויזנר: לחלוטין נכון, אפשר למזער סיכונים. בסוף הכל זה אוסף של איזון בין שיקולים...
+8/16/17, 10:34 - דוד חזני: זה התחום שלנו 😜
+8/16/17, 10:35 - ישי ויזנר: דרך אגב, למה db ולא פשוט סטורג׳ משותף?
+8/16/17, 10:36 - דוד חזני: כדי ששני בקשות לא יקבלו אותו ראשוני
+8/16/17, 10:36 - דוד חזני: שתי
+8/16/17, 10:36 - ישי ויזנר: תשתמש בנעילות על קבצים...
+8/16/17, 10:36 - ישי ויזנר: יש עוד מיליון דרכים...
+8/16/17, 10:38 - דוד חזני: שDB נותן אותם בחבילה
+8/16/17, 10:39 - ישי ויזנר: נכון, והוא פוגע בסקלאביליות והוא עוד משהו שיכול ליפול. שוב, איזונים. ☺
+8/16/17, 10:40 - דוד חזני: לגמרי
+8/16/17, 12:19 - בנימין גרינבוים: Please keep the discussion _quiet_ and if you have something to contribute do so respectfully. I'm looking for feedback on Node.js promise perf: https://github.com/nodejs/promises/issues/31
+8/16/17, 14:20 - מקס צ'רנין: אנצל את הבמה הזו לשאול אם יש כאן מישהו שמחפש עבודה, או יכול להמליץ על מפתח פרונט טוב שירצה להצטרף למייקרוסופט לקבוצת 
+windows cyber defence
+מדובר על עבודה על פורטל המאפשר חקירה לאנליסטים של ארגונים, יבוצע מעבר לאנגולר \ ריאקט (עדיין בוחנים) 
+עוד פרטים מוזמנים לקבל בפרטי
+8/16/17, 14:21 - מקס צ'רנין: defence or defense ?
+8/16/17, 17:28 - בנימין גרינבוים: https://docs.google.com/document/d/1iCdbXuGVV8BK750wmP32eF4sCrnZ8y3Qlz0JiaLh9j8/edit#heading=h.lazly6cykd7c
+8/16/17, 17:29 - בנימין גרינבוים: ואנגיולר, סורי 😅 אבל היועץ שיבוא ביום ראשון אמור להיות ממש סבבה
+8/16/17, 17:30 - מקס צ'רנין: Wat
+8/16/17, 17:31 - מקס צ'רנין: מה אתה lord varys ציפורים לוחשות לך מידע פנימי? 😅
+8/16/17, 17:32 - ניקולאי ריבל: Dude it's called open source
+8/16/17, 17:32 - בנימין גרינבוים: לא, אבל אני מיודד עם האנשים הרלוונטיים, אתה מוזמן לשלוח שאלה בפרטי
+8/16/17, 17:34 - מקס צ'רנין: התכוונתי להודעה השניה
+8/16/17, 17:34 - בנימין גרינבוים: גם אני
+8/17/17, 20:42 - מקס צ'רנין: קצת הכוונה
+8/17/17, 20:42 - מקס צ'רנין: אני רוצה להוסיף משהו לדוקומנטציה של angularjs, אני צריך לפתוח issue עם הצעה להוסיף את זה?
+8/17/17, 20:43 - Nir Weber: למה לא PR?
+8/17/17, 20:44 - מקס צ'רנין: זה מה שאני שואל, מה עושים, יש להם בדוקומנטציה כפתור improve this doc אבל הוא מוביל למימוש של הפונקציה ובסופו הדוקומנטציה
+8/17/17, 20:44 - מקס צ'רנין: ב github
+8/17/17, 20:44 - ניקולאי ריבל: כי עדיף לשאול קודם
+8/17/17, 20:44 - ניקולאי ריבל: כדי לא לעבוד סתם
+8/17/17, 20:46 - מקס צ'רנין: בקצרה, אין התייחסות ב 
+ng-class לשימוש בפונקציה כפרמטר
+ng-class="$ctrl.doSomething()"  וגם אין התייחסות אם זה מומלץ או לא (performance wise)
+8/17/17, 22:34 - דור צ'יזיק: אני לא מסכים
+8/17/17, 22:34 - דור צ'יזיק: עצם העבודה ושיפור הדוקומנטציה (וכל המחקר והידע שנלווה לזה) זה לבד מספיק בשביל שזה יהיה שווה את זה
+8/17/17, 22:35 - דור צ'יזיק: בנוסף, אם כבר עשית PR, רוב הסיכויים שיגידו לך "מגניב! רק א. ב. ג. צריך לתקן" כי כבר הראת שאתה מוכן להשקיע ולשים את הזמן
+8/17/17, 22:38 - ניקולאי ריבל: Right. Except when they won't :). The maintainer(s) may disagree or it could be a simple case of "oh, we're dropping that thing in the next version and improving the docs, have a look at branch 'foo/bar'". It's also basic courtesy to ask. It also signals that you're working on it, so nobody else wastes time on it (you could be the one wasting time).
+8/17/17, 23:05 - מקס צ'רנין: i prefer to ask, so should i open an issue, and they will tag it?
+8/17/17, 23:33 - בנימין גרינבוים: פשוט תכתוב pr
+8/18/17, 14:10 - דניאל חנקין: קרה לי פעמיים
+8/18/17, 14:38 - בנימין גרינבוים: קרה לי מלא פעמים - הרבה יותר טוב להגיע להיכרות עם המיינטיינר כשאתם כותבים קוד מאשר באישיו
+8/19/17, 17:55 - דור צ'יזיק: Has anyone here used a tiling manager like i3? (I'm looking at you @972526414324 )
+8/19/17, 18:00 - דניאל חנקין: Why hello there
+8/20/17, 11:19 - גיל תייר: A good Linux laptop with 32GB of RAM? Something that Just Works out of the box? I can install Linux, but I'm looking for something that doesn't need tinkering with.
+8/20/17, 11:20 - שחר אור: Dell XPS maybe
+8/20/17, 11:22 - גיל תייר: That's the current thinking, but I was wondering whether anybody has actual experience with it (or any other like it), e.g. how is the trackpad? Does it Just Work?
+8/20/17, 11:45 - ניקולאי ריבל: Lenovo are a known good choice for Linux and have a good reputation for hardware. I've also had (and have) Asus laptops which work very well.
+8/20/17, 11:47 - ניקולאי ריבל: Nowadays though, as long as you go with an integrated graphics card by Intel, you won't have any compatibility issues and the vendor is merely a matter of personal preference and style
+8/20/17, 11:52 - גיל תייר: So the responsiveness of the trackpad is not dependent on the Linux drivers? I doubt that. So one of my questions is - how good is the responsiveness of a Dell XPS 15 _running Linux_ as compared to a MBP?
+8/20/17, 11:52 - גיל תייר: Do you have experience running Linux on Lenovo?
+8/20/17, 11:53 - ניקולאי ריבל: Yes, it's perfect. Can't compare to a Mac, since never had one
+8/20/17, 11:56 - גיל תייר: Thanks. Which one did you work on?
+8/20/17, 12:02 - ניקולאי ריבל: עובר לפרטי כי זה דיאלוג וסתם רעש לאחרים
+8/20/17, 12:53 - בנימין גרינבוים: What are you doing 16 isn't enough for?
+8/20/17, 12:59 - גיל תייר: Building a grid of dockers and vm-s (Linux and Windows). And I want to run everything locally. Not sure I will really need it - just currently checking the options.
+8/20/17, 13:15 - ניקולאי ריבל: The more the merrier 😁
+8/20/17, 17:00 - דור צ'יזיק: A Linux build htat doesn't take tinkering with?
+8/20/17, 17:00 - דור צ'יזיק: When you find one, tell me too.
+8/20/17, 17:27 - גיל תייר: See, I'm getting conflicting opinions. Some say no problem,  some don't.
+8/20/17, 18:40 - תמר ליטבק: This is something I get to say a lot;
+ There is an Israeli startup that is doing just that
+
+http://www.compulab.com/products/embedded-pcs/
+8/20/17, 18:41 - תמר ליטבק: זו חברה ישראלית?
+8/20/17, 18:41 - תמר ליטבק: נחמד, הנישה שלהם
+8/20/17, 18:41 - תמר ליטבק: סליחה - בלבול בקבוצות 😬
+8/20/17, 19:03 - אלי מרמור: פעם, לפני שבכל IT של כל ארגון היה שרת VMware, רציתי לספק בכל זאת את הפרוקסי שלי בתור קופסה סגורה, אז הזמנתי הרבה מכונות זעירות כאלה מקומפיולאב, בניתי מערכת הפעלה אמבדד שלי (מבוססת קרנל לינוקס), צרבתי אותה על ה-ROM של המכונות, וככה סיפקתי את התוכנה שלי לארגונים שונים (למשל משרד התיירות)
+8/20/17, 20:42 - רן בר-זיק joined using this group's invite link
+8/21/17, 13:23 - ראם שרמן joined using this group's invite link
+8/21/17, 14:24 - בנימין גרינבוים: Stupid Realization: a module should never ever export state, in any language basically
+8/21/17, 14:25 - בנימין גרינבוים: It can, and should, export functionality (and sometimes things that manage state) but never state itself. State should always be orchestrated in a single file
+8/21/17, 14:25 - בנימין גרינבוים: Regardless of architecture, language or anything really. Now to write a plugin that lints that.
+8/21/17, 14:32 - מקס צ'רנין: Purgatory milestone - whats that?
+8/21/17, 14:37 - שחר אור: Benjamin, how would you write a plugin that lints that? How would you in JavaScript identify the developer's concept of state? Perhaps you didn't mean it seriously.
+8/21/17, 14:37 - שחר אור: Or didn't give it thought
+8/21/17, 14:44 - בנימין גרינבוים: I did mean it seriously. It's very easy to check for 90% of cases (it's possible to do 100% since escape analysis is possible in JS, but it'd be harder).
+8/21/17, 14:45 - בנימין גרינבוים: Everything exported from a module is either a function (without additional properties) or a const with a primitive value, or a class (and you limit what you can export in terms of statics on a class)
+8/21/17, 14:45 - בנימין גרינבוים: For the 100% case just do escape analysis on every variable and make sure only exported things are functions or classes. Of course you can still force weird state management but you'd have to be explicit about that.
+8/21/17, 14:46 - שחר אור: That sounds reasonable. What about a typical constants object?
+8/21/17, 14:47 - בנימין גרינבוים: nope, you can enforce that - but just export them as keys. Const primitive values are allowed to be exported.
+8/21/17, 14:47 - שחר אור: `import { foo, bar } from './constants'` kind of things
+8/21/17, 14:47 - בנימין גרינבוים: Yeah, that works, you allow functions, classes, and `const` that points to primitives.
+8/21/17, 14:47 - דניאל חנקין: Wait. What do you define as orchestrating. You concur that exporting only functions and classes keeps state to one file?
+8/21/17, 14:47 - בנימין גרינבוים: If you need to do calculations there - export a function
+8/21/17, 14:48 - בנימין גרינבוים: state isn't owned in one file (that'd be ridiculous) - you have several classes that manage state - but you only initiate creating them from one file.
+8/21/17, 14:48 - שחר אור: That means your constants are flat, I guess
+8/21/17, 14:49 - בנימין גרינבוים: That's true, if you need them to not be flat export several files, or pass configuration to modules instead of keeping it global. Immutable global state is better than mutable global state, but it's better to have as little as possible.
+8/21/17, 14:49 - שחר אור: Interesting idea. I'd like to see an ESLint plugin
+8/21/17, 14:49 - בנימין גרינבוים: also that comment was kind of rude, but  ¯\_(ツ)_/¯
+8/21/17, 15:03 - גיל תייר: Developers would easily circumvent it, just like OOP developers circumvented OOP - a class with getters and setters.
+8/21/17, 15:04 - בנימין גרינבוים: No statics
+8/21/17, 15:04 - בנימין גרינבוים: No statics, no singletons
+8/21/17, 15:05 - גיל תייר: But at some time you need to create the state.
+8/21/17, 15:05 - בנימין גרינבוים: In one place, you create the classes in one place
+8/21/17, 15:07 - גיל תייר: And that class has just getters and setters, which is OK by your standards, but defeats the whole purpose of having a bare state.
+8/21/17, 15:07 - בנימין גרינבוים: No, it doesn't
+8/21/17, 15:07 - בנימין גרינבוים: there is no global state, you have one file (call it bootstrap.js) that creates instances of all your stuff and calls `.run` on whatever or attaches to the DOM
+8/21/17, 15:08 - בנימין גרינבוים: Or that file resolves all the state with your injector and then sets the code up (calling a function)
+8/21/17, 15:08 - גיל תייר: I'm talking about defeating your linter, not about architecting the app.
+8/21/17, 15:08 - בנימין גרינבוים: this is not a new idea (just linting against bad code is, I think)
+8/21/17, 15:09 - בנימין גרינבוים: How are you going to defeat the linter?
+8/21/17, 15:09 - בנימין גרינבוים: The word `static` is prohibited, work with that assumption
+8/21/17, 15:09 - בנימין גרינבוים: A file can only export classes and functions, and those can't have additional modificaitons - you can also export values.
+8/21/17, 15:10 - גיל תייר: Just like I said. Create the state in the main app, pass it around, and use getters and setters instead of directly modifying the state.
+8/21/17, 15:10 - בנימין גרינבוים: "pass it around" means I won, the whole point was not to have global state.
+8/21/17, 15:11 - בנימין גרינבוים: Sure, you can still pass the same parameter everywhere and call it "global", but that means you're explicitly passing it everywhere which is a huge deal
+8/21/17, 15:11 - בנימין גרינבוים: What you're saying is that I don't lose any expressive power by doing this - which is a good thing :)
+8/21/17, 15:11 - גיל תייר: Yes, but it's just not global by scope. But if this global you pass around is the whole state, you haven't accomplished much.
+8/21/17, 15:12 - גיל תייר: This is what happened to oop. When developers couldn't really express their applications with objects, they created "objects" that are services, thereby circumventing oop.
+8/21/17, 15:12 - בנימין גרינבוים: Right, but you have to pass everything super explicitly if a method needs it. That's good.
+8/21/17, 15:13 - גיל תייר: It's better, but not really what you wanted.
+8/21/17, 15:13 - בנימין גרינבוים: I don't think that's it, I think developers just used globals. if you pass a "state" around then you know it's ugly. If I have a `Singleton.getInstance` it's an implicit global and I lost.
+8/21/17, 15:13 - גיל תייר: You've just made it more difficult for them to make it global. But the still found a way!
+8/21/17, 15:13 - בנימין גרינבוים: The next phase is - it doesn't have to be public, any state that's not controlled is uncontrolled state :D So no statics.
+8/21/17, 15:14 - בנימין גרינבוים: I made it impossible for them to make a global, there is nothing they can import and get the global at.
+8/21/17, 15:14 - בנימין גרינבוים: The boostrap code would have to explicitly allow them to use it.
+8/21/17, 15:14 - גיל תייר: _you_ know it's ugly. So do i, but they played by your rules and so have a false sense of security that it's not ugly.
+8/21/17, 15:15 - בנימין גרינבוים: There is nothing problematic with shared state, the problem is global state.
+8/21/17, 15:15 - בנימין גרינבוים: If every module gets a copy of the state, that's still heaps better - you can still test everything and know you'll get the same result every time.
+8/21/17, 15:15 - גיל תייר: You're trying to build a linter that recognizes bad architecture. What you get is something that all the not very good programmers will circumvent
+8/21/17, 15:15 - בנימין גרינבוים: If someone chooses to pass the whole state everywhere they're bad engineers - but they're still better off than they were.
+8/21/17, 15:16 - בנימין גרינבוים: I'm talking about a linter that recognizes global state, bad architecture is something you'll always be able to do (duh)
+8/21/17, 15:16 - גיל תייר: I don't think so. Because now they have a stamp of approval on their design. 😀
+8/21/17, 15:16 - בנימין גרינבוים: You can get around it by putting all your code in one file for instance.
+8/21/17, 15:16 - בנימין גרינבוים: I don't care about bad developers :D
+8/21/17, 15:16 - בנימין גרינבוים: Seriously, if someone wants to write bad code they can be my guest
+8/21/17, 15:17 - גיל תייר: But global state does not only manifest itself by global variables.
+8/21/17, 15:17 - בנימין גרינבוים: I'm not talking about a tool that solves world hunger
+8/21/17, 15:17 - בנימין גרינבוים: actually, it does.
+8/21/17, 15:17 - בנימין גרינבוים: If you have nothing that's module scoped then that's all you have to care about.
+8/21/17, 15:17 - בנימין גרינבוים: If you pass the state everywhere it's still not global since you still explicitly pass it every time.
+8/21/17, 15:17 - גיל תייר: I just described a bad architecture that doesn't use global variables
+8/21/17, 15:17 - גיל תייר: It has global state but no global variables
+8/21/17, 15:17 - בנימין גרינבוים: How is that related though?
+8/21/17, 15:18 - בנימין גרינבוים: It doesn't have global state, it has shared state that everyone is explicitly given access to.
+8/21/17, 15:18 - גיל תייר: Same same
+8/21/17, 15:18 - בנימין גרינבוים: Not at all - I'll try a simpler example
+8/21/17, 15:18 - בנימין גרינבוים: If I have a class and i have 3 students, and each asked to not attend a lecture - and I gave them each individual permission to not attend - then a student joins the class. Can that student automatically no attend?
+8/21/17, 15:19 - בנימין גרינבוים: No, they still have to go through capability theory checks.
+8/21/17, 15:19 - גיל תייר: If your module exports global state, and to use it, you need to import it explicitly, how is that different?
+8/21/17, 15:19 - בנימין גרינבוים: Your modules don't export global state, that's the point.
+8/21/17, 15:19 - בנימין גרינבוים: If your module exports global state - that's like using a singleton - that's awful :D
+8/21/17, 15:19 - בנימין גרינבוים: this, basically
+8/21/17, 15:20 - גיל תייר: I'm saying if they do. How is thats different from creating it locally and passing it everywhere?
+8/21/17, 15:20 - בנימין גרינבוים: Because it's uncontrolled, that's the point. You don't control the state in modules using that code. You have state that's "out there" and you have no control of.
+8/21/17, 15:20 - גיל תייר: Same if you pass a class with getters and setters
+8/21/17, 15:20 - בנימין גרינבוים: When you're passing it explicitly, you're explicitly determining the _capability_ of accessing that state.
+8/21/17, 15:21 - גיל תייר: I mean pass an instance of a class
+8/21/17, 15:21 - בנימין גרינבוים: I have no idea what you mean by "a class with setters and getters", if you pass an instance (or just an object you return from a () => ({}) that's fine.
+8/21/17, 15:21 - גיל תייר: Yes, but of everyone passes it, then you lose that capability
+8/21/17, 15:21 - בנימין גרינבוים: No, you explicitly gave permission to everyone.
+8/21/17, 15:21 - בנימין גרינבוים: If you want to use it with another state instead of the shared one you can - and it's reusable. Of course if you break the law of demeter and pass a god object you'll have a bad time anyway
+8/21/17, 15:22 - גיל תייר: What's the difference between passing a parameter, and importing a module?
+8/21/17, 15:22 - גיל תייר: Exactly, and your linter won't catch it
+8/21/17, 15:22 - בנימין גרינבוים: a module is imported once, and the state it contains (as a module) is tied to the duration of the program (which your calling code doesn't control)
+8/21/17, 15:23 - בנימין גרינבוים: because it's not a problem. I'm not suggesting writing a "code is good" linter, I'm suggesting a "state is not mutable global" linter)
+8/21/17, 15:23 - גיל תייר: When your code is designed correctly, you're right. But if it isn't, and you pass it carelessly around, you're not.
+8/21/17, 15:24 - גיל תייר: Exactly! And my point is that a good design won't need the linter, and a bad design will circumvent it.
+8/21/17, 15:24 - בנימין גרינבוים: "a good design won't need a linter" - bullshit :D
+8/21/17, 15:25 - בנימין גרינבוים: A good design will need as much help as it can to stay good, I'm suggesting an improvement and you're complaining it won't solve world hunger.
+8/21/17, 15:25 - בנימין גרינבוים: You're right - and it won't, but it will make sure you don't have implicit state around.
+8/21/17, 15:25 - בנימין גרינבוים: You can have mutable state, but it's explicit.
+8/21/17, 15:25 - בנימין גרינבוים: And if you _truly_ want to pass a `GodState` parameter on every class constructor you can do it - but it's a lot more work than just passing what you need.
+8/21/17, 15:26 - בנימין גרינבוים: The good choice is easier than the poor one
+8/21/17, 15:26 - בנימין גרינבוים: it'll be*
+8/21/17, 15:27 - גיל תייר: I believe we're both right. In a sound design, it will help the developer who inadvertently does it. But I am right in that it will allow a bad designer to feel that their state is not global because it passes the linter, when in fact all they did was circumvent it
+8/21/17, 15:27 - בנימין גרינבוים: Is your argument really "don't give linters to developers because it will give them a false sense of security"?
+8/21/17, 15:28 - בנימין גרינבוים: If someone is a bad developer, not only will it not save him from writing bad code - I'm completely interested in their code altogether.
+8/21/17, 15:28 - בנימין גרינבוים: *disinterested in their code
+8/21/17, 15:28 - גיל תייר: No. My argument is on this linter. And even then I can see how it may be useful in a large team.
+8/21/17, 15:30 - בנימין גרינבוים: Using the same principle, let's not guard against people using `var` instead of `let` because it gives them a false sense of security about scoping, let's not lint objects because they give you a false sense of architecture, and don't lint against `with` because it gives you a false sense that the linter guards your program against bad code usage and maybe you wanted to explicitly trigger an error in strict mode.
+8/21/17, 15:30 - בנימין גרינבוים: I'll take "pragmatic" every day :)
+8/21/17, 15:31 - מנחם ציקואשוולי: so as any other linter around...
+8/21/17, 15:32 - מנחם ציקואשוולי: ...
+8/21/17, 15:32 - גיל תייר: You got me wrong. But that's ok.
+8/21/17, 15:32 - בנימין גרינבוים: Of course misunderstandings are ok - but it would be great if you explained what I misunderstood :P
+8/21/17, 15:33 - מנחם ציקואשוולי: A fascinating discussion btw...
+8/21/17, 15:38 - גיל תייר: Most Lint rules apply locally. And make sense locally. You're trying to define a local rule that is actually a proxy to a much more global/architectural rule. So, yes, heuristically, in a good team with good leaders, it helps, but as q general rule it may make the opposite effect - it may give a bad team a sense that their design is sound. This is why I think we are both right.
+8/21/17, 15:47 - בנימין גרינבוים: I'll quote someone I know and respect about bad developers
+8/21/17, 15:48 - בנימין גרינבוים: > bad uses of JavaScript existed long before X ever came out - X being popular doesn't stop bad devs from existing, the only thing that stops bad devs is good education
+8/21/17, 15:48 - בנימין גרינבוים: Also again, if someone is a bad dev, I'm disinterested in their code generally.
+8/21/17, 15:48 - גיל תייר: Yes, but at least you understand me. 🙂
+8/21/17, 15:53 - מנחם ציקואשוולי: there's a thin line between the real purpose of linters and the wrong way that a common developer may take it to. 
+linter in general is a good thing. 
+you cannot control the way it affects every developer. 
+if he's a good one or at least someone who's in the right direction... 
+linter won't stop him from improving his coding skills.
+8/21/17, 15:53 - מנחם ציקואשוולי: good point though
+8/21/17, 17:02 - גיל תייר: *If* they accept my Reversim talk about giving programmers a false sense of security through safety nets, then hopefully I'll be able to add this example (or something similar at least) to it... 🙂
+8/21/17, 17:42 - בנימין גרינבוים: Feel free, although I disagree with the premise of safety nets being a bad thing if they introduce 0 overhead.
+8/21/17, 17:43 - בנימין גרינבוים: If you write unit tests and think that means your code is correct - or write redux and think that means your code has architecture - that's a problem with _you_ and not the tools. The tools are not communicating anything else. You'd never see mocha advertize no bugs or Redux good architecture.
+8/21/17, 18:05 - ניקולאי ריבל: Godwin's law, in Benji's case is _"As an online discussion grows longer, the probability of a comparison involving Hitler and Redux approaches 1."_ 🤣
+8/21/17, 18:05 - בנימין גרינבוים: It's August 2017, none of us like Redux anymore.
+8/21/17, 18:06 - בנימין גרינבוים: We all liked it a while ago, we all talked about how great it is, then we all used it and now we all understand the catch and prefer MobX.
+8/21/17, 18:06 - בנימין גרינבוים: I can name at least 10 people in this room who went that route, me and you included :D
+8/21/17, 18:07 - ניקולאי ריבל: <Media omitted>
+8/21/17, 18:08 - גיל תייר: 😄
+8/21/17, 18:12 - מנחם ציקואשוולי: חחחחחחח
+8/21/17, 18:13 - בנימין גרינבוים: I just want to point out I used to say how great redux is too 2 years ago. Shai won't forget it until I'm 90 :D
+8/21/17, 18:13 - גיל תייר: What I find amazing is that I don't remember a single discussion where I agreed with benjie, and yet I still respect his opinions and professionalism! 😊
+8/21/17, 18:15 - גיל תייר: I've had that with lots of technologies. The things I mostly recall are Spring and OOP. I thought they were the bees knees backed in the days. I don't anymore.
+8/21/17, 18:15 - אלי מרמור: אילו זה היה בעברית, הייתי עלול לחשוב שגנבת לי את המילים
+8/21/17, 18:17 - אלי מרמור: אבל נראה לי שלפעמים הוא אומר בכוונה ההיפך ממה שאנחנו חושבים.
+כאילו מה, אתה באמת חושב ש-K£R זה ספר דפוק?!
+(ואיפה לעזאזל האמפרסנד באנדרואיד?!)
+8/21/17, 18:17 - אלי מרמור: 😉
+8/21/17, 18:17 - גיל תייר: אחד הספרים החשובים שקראתי...
+8/21/17, 18:18 - בנימין גרינבוים: לא אמרתי שזה ספק דפוק אובייקטיבית, אמרתי שזה ספק דפוק לתת למישהו לקרוא בתור ״קח תלמד סי״ לאנשים בלי רקע בתכנות
+8/21/17, 18:19 - גיל תייר: לא! לא! אני מסכים עם בנג'י!
+8/21/17, 18:19 - גיל תייר: 😀
+8/21/17, 18:19 - בנימין גרינבוים: If I agree with what you're saying I silently nod, I don't see a point in debating the consensus
+8/21/17, 18:19 - גיל תייר: לדעתי ללמד c כשפה ראשונה זו כבר טעות
+8/21/17, 18:20 - בנימין גרינבוים: אני לא מסכים, לא כי אני חושב שהיא שפה ראשונה טובה, אלא כי זה לא חשוב בעיני
+8/21/17, 18:20 - גיל תייר: Well, people do like that nod to not be silent. It's an emotional need, not a logical one.
+8/21/17, 18:21 - גיל תייר: Well, the agreement was good while it lasted. 😀
+8/21/17, 18:21 - גיל תייר: <Media omitted>
+8/21/17, 18:22 - גיל תייר: Ignore that... 😊
+8/21/17, 18:24 - בנימין גרינבוים: Any technical discussion where everyone has the same opinion is just churn. I don't need people like you and me need positive reinforcements for agreement - we literally have a hundred people giving us applause when we speak at conferences and meetups and tons of positive feedback - I think that's more positive reinforcement than is healthy for me anyway and I'm not sure what the rest of you do about it.
+8/21/17, 18:25 - גיל תייר: Agreed when it's a big group discussion. Disagree when it's a one on one or three. Even if it's on a group chat
+8/21/17, 18:25 - בנימין גרינבוים: Oh I agree - if it was under 5 people here I would have talked more
+8/21/17, 18:25 - בנימין גרינבוים: The one thing that's funnier than that is StackOverflow where points literally mean participation and not technical understanding
+8/21/17, 18:40 - מקס צ'רנין: **************************************
+Im getting a xhr request canceled and i have no idea why,
+looking into chrome://net-internals/ i saw there were some delegations by chrome extensions, so i disabled those, but the problem still occurs.
+so im thinking this is the problem:
+response headers have a content-length header of 21
+and than i see
+
+t=63422 [st=182]    URL_REQUEST_JOB_BYTES_READ
+                    --> byte_count = 21
+t=63422 [st=182]    URL_REQUEST_JOB_FILTERED_BYTES_READ
+                    --> byte_count = 1
+
+the request works well on fiddler\direct url in chrome, but not from my app
+******************************************************************************
+8/21/17, 18:41 - בנימין גרינבוים: Whats' the Content-Type?
+8/21/17, 18:41 - מקס צ'רנין: application/json; charset=utf-8
+8/21/17, 18:42 - בנימין גרינבוים: How are you making the request? (MCVE)
+8/21/17, 18:42 - Nir Weber: Dare me and i will start a DevHelps scoring system...
+8/21/17, 18:43 - בנימין גרינבוים: consider yourself dared
+8/21/17, 18:45 - מקס צ'רנין: meaning? are you reffering to code or request details (header, etc)
+8/21/17, 18:45 - בנימין גרינבוים: https://stackoverflow.com/help/mcve
+8/21/17, 18:45 - בנימין גרינבוים: Minimal code that reproduces the issue
+8/21/17, 18:46 - מקס צ'רנין: how can i reproduce the issue if its happening on my browser only :X i can show you the detailed request
+8/21/17, 18:46 - בנימין גרינבוים: So this only reproduces on your computer?
+8/21/17, 18:47 - מקס צ'רנין: well, the url is internal for now, but i do think te problem is the content-length
+8/21/17, 18:47 - מקס צ'רנין: <Media omitted>
+8/21/17, 18:48 - בנימין גרינבוים: If it doesn't only happen on your computer then reproduce it in a way I can test - otherwise we can't really help you
+8/21/17, 18:48 - מקס צ'רנין: that's the best ive got :X
+8/21/17, 18:49 - בנימין גרינבוים: Then no dice, sorry
+8/21/17, 18:49 - גיל תייר: Maybe on of those background apps interfere?
+8/21/17, 18:49 - גיל תייר: Did you try in incognito?
+8/21/17, 18:49 - גיל תייר: Create another account in Chrome and try?
+8/21/17, 18:51 - גיל תייר: Try and disable the content zipping? Not as a solution, but as a way to figure out what the problem is.
+8/21/17, 18:58 - מקס צ'רנין: fucking aye. gonna need to check server side code tomorrow
+8/21/17, 19:07 - גיל תייר: Tell me all about it!
+8/21/17, 19:38 - בנימין גרינבוים: The log doesn't actually show a problem, you can gzip 1 byte and get 24 bytes back
+8/21/17, 22:34 - ניצן תומר joined using this group's invite link
+8/22/17, 10:23 - שלומי זק: טוב, זה לונג שוט, אבל אולי מישהו כאן יוכל לעזור.
+לצורך רנדור צד שרת של ריאקט בphp, אנחנו מריצים את הjs בv8js (לא בדפדפן).
+נתקלנו בהתנהגות די מוזרה - כשעושים require לקומפוננט, המשתנה שמקבל את הrequire מכיל אובייקט עם closure במקום פונקציה (הייצוא של קומפוננט זה ייצוא של הפונקציה createElement).
+אנחנו מקבלים שגיאה מהריאקט של objects are not valid as React child.
+יש לציין שאותו קוד בדיוק עובד בדפדפן.
+יש למישהו רעיון לפתרון?
+8/22/17, 10:24 - בנימין גרינבוים: איזה גרסא של V8JS ומה הוא טוען?
+8/22/17, 10:24 - בנימין גרינבוים: הוא טוען את הבאנדל או את הקבצים?
+8/22/17, 10:25 - בנימין גרינבוים: מציע דרך אגב להרים פשוט node ולעשות אליו proxying
+8/22/17, 10:27 - שלומי זק: זו אופציה, בנתיים עוד משחקים עם הphp.
+טוען את הקבצים, לא את הבאנדל (בנינו module loader זהה לזה של node)
+8/22/17, 10:44 - שלומי זק: הגרסא של V8JS היא 1.3.4
+8/22/17, 10:45 - בנימין גרינבוים: בניתם module loader?
+8/22/17, 10:45 - בנימין גרינבוים: אז מן הסתם הוא שגוי :P וגם אל תעשו את זה
+8/22/17, 10:47 - שלומי זק: למה? על שתי ההנחות שלך
+8/22/17, 10:55 - Nir Weber: אולי בגלל מה שכתבת:
+"כשעושים require לקומפוננט, המשתנה שמקבל את הrequire מכיל אובייקט עם closure במקום פונקציה"
+8/22/17, 10:55 - Nir Weber: אולי ה-module loader שלכם עוטף את הקומפוננטה
+8/22/17, 10:59 - שלומי זק: נוטה לחשוב שהבעיה דווקא במקום אחר
+8/24/17, 11:19 - מקס צ'רנין: anyone got a good article about front-end and backend developers integration?
+8/24/17, 11:19 - מקס צ'רנין: method of work, how webapis should look & presist
+8/24/17, 11:19 - מקס צ'רנין: etc
+8/24/17, 11:44 - מיכאל הברמן: Graphql
+8/24/17, 11:49 - תמר ליטבק: https://github.com/wearehive/project-guidelines/blob/master/README.md
+8/24/17, 11:50 - תמר ליטבק: גם על api
+8/24/17, 14:12 - דניאל חנקין: <Media omitted>
+8/24/17, 14:17 - גיל תייר: כן, אבל מלא שרותים באינטרנט לא חושבים שזו כתובת אימייל חוקית. 😕
+8/24/17, 15:19 - דור צ'יזיק: מה, עם נקודות?
+8/24/17, 15:19 - דור צ'יזיק: לא מכיר שירות שמקבל מיילים ולא מקבל נקודות
+8/24/17, 15:19 - דור צ'יזיק: יש גם את הטריק עם ה+ים, שאת זה באמת הרבה לא מקבלים
+8/24/17, 15:20 - גיל תייר: וואללה, נכון - דיברתי על הטריק עם הפלוסים.
+8/24/17, 16:30 - ניקולאי ריבל: גם אני ניסיתי את זה כשגיליתי ואז נוכחתי שזה לא עובד באף מקום ☹
+8/24/17, 16:56 - מקס צ'רנין: anyone here heard of or worked with Gil Fink?
+8/24/17, 17:01 - ניקולאי ריבל: I know him, but haven't worked with him. Some people here did though
+8/24/17, 17:01 - בנימין גרינבוים: I have, and I recommend him
+8/24/17, 17:02 - בנימין גרינבוים: He has always left a very positive impression and I'm sure he can get the job done
+8/24/17, 17:03 - ניקולאי ריבל: To the little extent I do know Gil, he's indeed very nice, friendly and approachable
+8/24/17, 17:05 - שלומי זק: הרצה בכנס אנגולר אפ האחרון
+8/24/17, 17:13 - מקס צ'רנין: שוקלים לקחת קורס אנגולר 4 איתו
+8/24/17, 17:14 - מקס צ'רנין: מישהו עבר?
+8/24/17, 17:48 - מיכאל הברמן: עבדתי איתו ביחד בחברה הקודמת, הוא מאוד מקצועי
+8/24/17, 17:48 - בנימין גרינבוים: תקחו קורס JS, לא קורס אנגיולר, גם איתו זה סבבה
+8/24/17, 17:49 - בנימין גרינבוים: אתם לא צריכים לדעת Angular 4 במיקרוסופט, אף אחד שם חוץ ממך לא יודע שם ג׳אווהסקריפט
+8/24/17, 17:50 - סבסטיאן פרדיבה: Yes. Why?
+8/24/17, 18:38 - מקס צ'רנין: לא נראה לי שזה בעדיפות שלהם בני
+8/24/17, 18:38 - מקס צ'רנין: רוצים להכניס את החברה לאנגולר 4
+8/24/17, 18:50 - אלי מרמור: להכניס ראש בריא ל😉
+8/24/17, 21:13 - בנימין גרינבוים: הזוי
+8/24/17, 21:14 - בנימין גרינבוים: אי אפשר לבנות מוצר טוב בלי engineering טוב
+8/24/17, 21:14 - מקס צ'רנין: תשמע כשהמוצר שלך עובד ומכניס כסף הסדרי עדיפויות קצת אחרים :\
+8/24/17, 21:15 - מקס צ'רנין: בונים את זה, לאט, עכשיו עם כל השינויים
+8/24/17, 21:15 - בנימין גרינבוים: בדיוק. אז למה זה הזמן לעבור פריימוורק?
+8/24/17, 21:17 - מקס צ'רנין: נרכש מוצר שכתוב בangular 4
+8/24/17, 22:27 - אלי מרמור: משתתפים בצערכם!
+8/24/17, 22:28 - ניקולאי ריבל: הנה, מישהו אמר את זה לפני! 😅
+8/24/17, 22:30 - אלי מרמור: מה שאני לא מבין:
+מישהו הספיק ללמוד ng4, לפתח עם זה מוצר, למכור אותו למיקרוסופט, ועכשיו הם רוצים ללמוד ng4, ואנחנו עדיין רק באוגוסט 18??
+8/24/17, 22:30 - אלי מרמור: 18 סליחה
+8/24/17, 22:30 - אלי מרמור: 17
+8/24/17, 22:35 - מקס צ'רנין: היה כאן מוצר עובד באנגולר 1 ונרכש מוצר משלים באנגולר 2, עשינו את הבחירות שלנו, התמונה היא יותר רחבה תלוי איך אתה מסתכלים על זה אני מבחינתי הפסקתי לרדוף אחרי טכנולוגיה ומתרכז בחברה ובמוצר היום זה אנגולר מחר זה משהו אחר
+8/24/17, 22:35 - גיל תייר: 👍
+8/24/17, 22:37 - אלי מרמור: ובניגוד למה שנאמר קודם, במיקרוסופט ישראל דווקא יודעים JS טוב;
+בהרצליה למשל פיתחו את ה(נראה איך זה ייצא משמאל לימין:)
+on(x)
+8/24/17, 22:40 - אלי מרמור: on{x}
+8/24/17, 22:41 - מקס צ'רנין: הם מופזרים בתוך צוותים שלא חזקים כולם בJS אלא עושים את זה בנוסף (בישראל לפחות) אבל גם זה משתנה לאט
+9/3/17, 12:52 - Nir Weber: hey guys,
+I have an issue with WCF over HTTPS.
+
+this works:
+Request>>AWS ELB (443)>>Windows IIS (80)
+
+this doesn't:
+Request>>AWS ELB (443)>>Windows IIS (443)
+"The remote server returned an error: (404) Not Found."
+
+in the IIS i have 443 binding with the correct certificate.
+
+any ideas?
+9/3/17, 12:54 - ישי ויזנר: וכשאתה גולש לשם סתם עם הדפדפן זה עובד?
+9/3/17, 12:55 - Nir Weber: כן
+9/3/17, 12:56 - ישי ויזנר: זה 404, זה לא נראה כמו שגיאה בcertificate...
+9/3/17, 12:58 - Nir Weber: נכון. אבל מספיק שאני משנה את ה-listener על ELB מ-
+443>>80
+ל:
+443>>443
+זה נדפק. 
+אז למה יש 404?
+9/3/17, 13:34 - ניר זלוף: נראה לי שהשינוי ב IIS גרם  לנתב את הבקשה ל Default  web application
+9/3/17, 13:35 - ניר זלוף: נראה כי הבקשה הגיעה לשרת אבל לא למקום הנכון
+9/3/17, 13:35 - Nir Weber: השינוי לא בוצע ב-IIS. הוא בוצע על ה-Listener של ה-ELB.
+9/3/17, 13:35 - ניר זלוף: הבנתי , אבל בשרת לאן  הבקשה מנותבת?
+9/3/17, 13:36 - Nir Weber: <Media omitted>
+9/3/17, 13:36 - ניר זלוף: נראה כי הבקשה הגיע לשרת  שלך
+9/3/17, 13:37 - Nir Weber: ל-IIS. הוא _מאזין_ בפורט 443 ל-*, ז"א לכל HOST
+9/3/17, 13:37 - ניר זלוף: אם אתה פונה ישירות לשרת ?
+9/3/17, 13:37 - ניר זלוף: ב HTTPS
+9/3/17, 13:37 - ניר זלוף: מה אתה מקבל ?
+9/3/17, 13:37 - Nir Weber: בדפדפן עובד.
+אבל אם אני פונה ל-endpoint של ה-SOAP אני מקבל 404.
+9/3/17, 13:41 - ניר זלוף: קצרה ידי
+9/3/17, 13:57 - ישי ויזנר: כולם יושבים על אותו המחשב/שרת או על מחשבים נפרדים?
+9/3/17, 15:10 - Nir Weber: מי זה _כולם_?
+9/3/17, 15:11 - Nir Weber: על מכונה יש IIS. ה-Load Balancer יושב באמאזון.
+9/3/17, 15:20 - ישי ויזנר: אז הייתי מנסה לפתוח wireshark על המכונה עם הiis ולראות אם הבקשות מגיעות לשם ואיך הן נראות.
+9/3/17, 15:22 - ישי ויזנר: אם הן מגיעות- הייתי מסתכל על הלוגים של iis (ואם הם מכובים- מפעיל אותם) ומנסה להבין מה הוא בדיוק חושב שהוא מקבל.
+9/3/17, 15:23 - ישי ויזנר: אם הן לא מגיעות- כנראה שהELB חושב שהשרת למטה ובכלל לא מפנה אליו בקשות.
+9/3/17, 15:24 - ניר זלוף: אם חוזר 404 זאת הזה הגיע לשרת
+9/3/17, 15:25 - ניר זלוף: כנראה זה מנותב למקום אחר ברמת  ה- IIS
+9/3/17, 15:25 - ישי ויזנר: אתה בטוח? אין פיצ׳ר כזה בelb?
+9/3/17, 15:26 - ישי ויזנר: בכל מקרה, אפשר לראות לאיזה פורט בדיוק זה מתקבל ומה קורה שם.
+9/3/17, 15:34 - Nir Weber: תודה! אנסה ואעדכן
+9/3/17, 17:02 - Nir Weber: הסתדרתי. הגדרות WCF (סיוט כמו תמיד).
+9/3/17, 17:02 - Nir Weber: https://stackoverflow.com/questions/34609836/wcf-soap-service-returns-404-not-found-for-https-endpoint
+9/3/17, 17:03 - Nir Weber: תודה!
+9/3/17, 17:05 - ניצן תומר: so where's the upvote?
+9/4/17, 16:51 - שלומי זק: רנדור ריאקט בצד שרת - יש פתרונות אלגנטיים לשימוש במשתנים גלובליים של הדפדפן (window, document וכו׳) ?
+כרגע אנחנו בודקים לפני כל שימוש במשתנה כזה. אני לא כל כך נלהב לשנות את השיטה (יש בה הגיון), אבל מעניין אותי לשמוע על פתרונות ססגוניים שאנשים אחרים פה נתקלו בהם (:
+9/4/17, 16:58 - ניקולאי ריבל: Jsdom polyfills and mocks browser globals
+9/4/17, 17:13 - בנימין גרינבוים: https://github.com/rstacruz/jsdom-global - but if you can still do it - don't use window at all
+9/4/17, 17:14 - בנימין גרינבוים: In general, you should encapsulate APIs in modules and do the `typeof window` _once_ there
+9/4/17, 17:16 - שלומי זק: יכול להרחיב? למה להמנע משימוש בwindow?
+9/4/17, 17:17 - בנימין גרינבוים: כמו כל משתנה גלובאלי - זה רעיון רע
+9/4/17, 17:17 - בנימין גרינבוים: מאותה סיבה שאתה נמנע מglobal בnode
+9/4/17, 17:17 - שלומי זק: ברור, אבל בקליינט יש פעולות שמחייבות שימוש בwindow/document/etc
+9/4/17, 17:19 - דור צ'יזיק: המנע משימוש בwindow כאשר הקונטסט אינו מאפשר
+9/4/17, 17:20 - דור צ'יזיק: לצורך העניין, אתה יכול להיות בטוח שwindow יהיה זמין בתוך componentDidMount (*לא* בcomponentWillMount) ובתוך כל event listener ששייך לDOM (למשל onClick={} וכו')
+9/4/17, 17:21 - דור צ'יזיק: כנ"ל לגבי componentWillUnmount (בשביל cleanup)
+9/4/17, 17:21 - שלומי זק: עכשיו הבנתי
+9/4/17, 17:22 - שלומי זק: יחד עם זאת, זה לא פותר 100% מהמקרים
+9/4/17, 17:22 - דור צ'יזיק: אני כמעט בטוח שהמקרים האחרים הם לא לגיטמיים או פתירים
+9/4/17, 17:22 - דור צ'יזיק: try me :)
+9/4/17, 17:22 - דור צ'יזיק: "הם או לא לגיטימיים או פתירים"*
+9/4/17, 17:24 - שלומי זק: תחשוב על זה ככה:
+נניח שיש לי קומפוננט, שמרנדר אלמנט על בסיס רוחב החלון
+9/4/17, 17:24 - דור צ'יזיק: תשתמש בCSS media queries
+9/4/17, 17:24 - שלומי זק: אז אתה אומר - אין בעיה, תעשה את החישוב בdidMount ולא בwillMount.
+על פניו זה פתרון סביר
+9/4/17, 17:25 - שלומי זק: בפועל, מה שיקרה הוא שבהכרח ברנדור צד שרת האלמנט לא יופיע. זו הסיבה שבגללה לא קורץ לי עדיין לשנות את שיטת העבודה הנוכחית
+9/4/17, 17:25 - דור צ'יזיק: אם אתה עושה דברים כאלה, אתה צריך להתחיל להקשיב לonResize ו-onOrientationChange ולעדכן state
+9/4/17, 17:25 - דור צ'יזיק: אחרת דברים לא יתעדכנו כשגודל החלון משתנה
+9/4/17, 17:26 - דור צ'יזיק: הפיתרון הנכון כאן הוא להשתמש בCSS media query ולתת לCSS להחביא או להציג את האלמנטים המדוברים
+9/4/17, 17:26 - ניקולאי ריבל: And those you should avoid anyways
+9/4/17, 17:26 - דור צ'יזיק: יש מקרים לגיטימיים, אנליטיקות לדוגמה
+9/4/17, 17:26 - דור צ'יזיק: אבל זה לא אחד מהם.
+9/4/17, 17:26 - שלומי זק: זה נכון ברוב המוחץ של המקרים
+9/4/17, 17:27 - שלומי זק: בפועל, יש מקרים שזה לא אפשרי.
+9/4/17, 17:27 - שלומי זק: לפני שתגיב
+9/4/17, 17:27 - שלומי זק: תזכור דבר כזה - אני לא נמצא בחברת מוצר
+9/4/17, 17:27 - דור צ'יזיק: במקרה הכי הכי *הכי* קיצוני, אתה יכול לרנדר 2 מיכלים שלמים עם 2 גירסאות שלמות ולהחביא אחד מהם ולהציג את השני. תמיד שמורה לך האופציה הזאת.
+9/4/17, 17:28 - דור צ'יזיק: <div className="mobile">....</div><div className="desktop">.....</div>
+9/4/17, 17:28 - דור צ'יזיק: ולהחביא אחד מהם בCSS
+9/4/17, 17:28 - דור צ'יזיק: זה פתרון מזעזע, והוא *עדיין* יותר טוב בעיני מאשר לעשות את זה בJS
+9/4/17, 17:29 - שלומי זק: למה?
+9/4/17, 17:29 - דור צ'יזיק: כי אתה מקבל את כל הפונקציונליות הזאת של CSS בחינם
+9/4/17, 17:29 - שלומי זק: למה הוא יותר טוב מבjs הייתה הכוונה
+9/4/17, 17:29 - דור צ'יזיק: הרינדור קורה מייד, אין לך remounting בשום מצב, אין לך reconciliation יקר
+9/4/17, 17:30 - שלומי זק: לשים שני מיכלים זו כתיבה מאוד שגויה
+9/4/17, 17:30 - דור צ'יזיק: אני מסכים
+9/4/17, 17:30 - דור צ'יזיק: כמו שאמרתי, זה פיתרון דיי קיצוני
+9/4/17, 17:31 - דור צ'יזיק: בינתיים, אני יכול לספור על יד אחת (ואפילו על חצי יד) את כמות הפעמים שהייתי חייב לבצע פעולה כזו בJS
+9/4/17, 17:31 - דור צ'יזיק: וכמעט תמיד היו עם זה באגים יותר מאוחר
+9/4/17, 17:31 - דור צ'יזיק: לא, אני חוזר בי. _תמיד_ היו עם זה באגים יותר מאוחר
+9/4/17, 17:32 - שלומי זק: כרגע אנחנו לא משתמשים בפוליפיל, אלא בודקים לפני כל שימוש במשתנה גלובלי של הדפדפן
+9/4/17, 17:32 - שלומי זק: זה מאפשר לנו להכריע מה קורה כשאין דפדפן - ברנדור צד שרת
+9/4/17, 17:32 - דור צ'יזיק: היוזר שינה את הגודל בדף אחר, ואז חזר ואז הלך, ואז שינה את הגודל, ואז לא יודע מה, ופתאום רואים אלמנט שאמור להיות רק במובייל בגירסת הדסקטופ
+9/4/17, 17:32 - דור צ'יזיק: באגים כאלה, שבלתי אפשרי לשחזר אותם בצורה נורמלית
+9/4/17, 17:33 - שלומי זק: אבל אתה לא מתעמק בבעיה הנכונה
+9/4/17, 17:33 - שלומי זק: הריסייז הוא לא הבעיה שלי.
+יותר מזה - בקליינט אין לי בעיות בכלל
+9/4/17, 17:33 - שלומי זק: הבעיה היא ברנדור צד שרת
+9/4/17, 17:34 - שלומי זק: פשוט תהיתי אם יש פתרונות מעניינים אחרים
+9/4/17, 17:34 - ניקולאי ריבל: In general, stuff which requires client side apis doesn't make sense server side and can be left out of ssr
+9/4/17, 17:34 - דור צ'יזיק: תיארת דוגמה: לחשב את הרוחב של החלון ולפי זה לקבוע האם לרדנר אלמנט מסויים או לא
+9/4/17, 17:34 - ניקולאי ריבל: Then it's only in client, where it does make sense
+9/4/17, 17:34 - דור צ'יזיק: אני טוען שהדוגמה הזאת היא לא מקרה לגיטימי כי אתה אמור (בראייתי) להימנע מהמצב הזה כמעט בכל מחיר
+9/4/17, 17:35 - דור צ'יזיק: כן, אבל הרעיון הוא שיש לך את אותו עץ קומפוננטות
+9/4/17, 17:35 - דור צ'יזיק: ולכן אם יש לך window.addEventListener איפשהו בconstructor או בwillMount או בrender, אכלת אותה
+9/4/17, 17:35 - דור צ'יזיק: ואז אתה יכול לבדוק האם ```'typeof window !== 'undefined``` אבל זה לא כיף במיוחד
+9/4/17, 17:36 - ניקולאי ריבל: Which usually makes sense and serves an important purpose. But when it doesn't, don't fight it
+9/4/17, 17:37 - שלומי זק: זה לא מדוייק. בסופו של דבר אתה רוצה שהרנדור צד שרת שלך יהיה מדוייק ככל הניתן, בעיקר seo-wise
+9/4/17, 17:37 - ניקולאי ריבל: You don't need client APIs for SEO
+9/4/17, 17:38 - דור צ'יזיק: The question is how to exclude them
+9/4/17, 17:38 - דור צ'יזיק: Obviously you don't need client APIs on the server
+9/4/17, 17:38 - דור צ'יזיק: But given that the codebase is the same, how do you selectively not run certain parts on the server?
+9/4/17, 17:38 - שלומי זק: בודק typeof לפני שימוש בAPI
+9/4/17, 17:39 - שלומי זק: זה מאפשר לי להכריע *בדיוק* מה יצא לי ברנדור צד שרצ
+9/4/17, 17:39 - דור צ'יזיק: נכון, אבל זה מבאס, כמו שאמרת :)
+9/4/17, 17:39 - שלומי זק: שרת שרת, לא שרצ..
+9/4/17, 17:39 - שלומי זק: ועדיין לא שכנעת אותי ששני htmlים עדיפים..
+9/4/17, 17:39 - ניקולאי ריבל: Use define plugin and check whether you're in client or SSR
+9/4/17, 17:40 - דור צ'יזיק: והטענה שלי היא שאתה יכול (וצריך) לכתוב בצורה כזו ששימוש בclient-side APIs יהיה רק במקומות בהם מובטח לך שזה לא ירוץ בשרת
+9/4/17, 17:40 - דור צ'יזיק: כגון componentDidMount, componentWillUnmount ו- event listeners
+9/4/17, 17:41 - דור צ'יזיק: לאו דווקא לכתוב 2 HTMLים
+9/4/17, 17:41 - דור צ'יזיק: הטענה שלי היא שלרנדר 2 HTMLים ולתת לCSS לקבוע איזה מהם יוצג זה פיתרון שעדיף על למדוד את הגודל בJS (על כל המשתמע מכך) ולעשות את הלוגיקה בJS
+9/4/17, 17:41 - דור צ'יזיק: זה הכל
+9/4/17, 17:42 - דור צ'יזיק: לא טענתי שזה מהלך לגיטימי, רק שהוא יותר לגיטימי מהמהלך השני
+9/4/17, 17:43 - שלומי זק: אני לא בטוח שאני מסכים
+9/4/17, 17:43 - ניקולאי ריבל: You know that measuring stuff forces a browser reflow, right?
+9/4/17, 17:44 - ניקולאי ריבל: It is very slow and a well known bad practice
+9/4/17, 17:48 - שלומי זק: לקבל מwindow את רוחב החלון?
+9/4/17, 18:03 - שלומי זק: צריך להסתכל על היתרונות והחסרונות של האלטרנטיבה
+9/4/17, 18:04 - שלומי זק: @972528588456 נניח ואני הולך עם הפתרון של דור לצורך השעשוע, איך אתה מטפל בעניין הseo עם שני בלוקים זהים של html?
+9/4/17, 18:07 - ניקולאי ריבל: לגבי זה אני לא בטוח. חשבתי שהתכוונת למדידה של גודל של אלמנטים בדום. זה יקר וגרוע
+9/4/17, 18:08 - שלומי זק: אז אולי לא הייתי ברור (:
+9/4/17, 18:10 - בנימין גרינבוים: דור מדבר על בעיה מעניינת והוא צודק
+9/4/17, 18:11 - בנימין גרינבוים: אין ספק שכל פעם שעשינו רספונסיביות לא בCSS שילמנו על זה עם ריבית
+9/4/17, 18:11 - בנימין גרינבוים: וזה לא פתיר ברנדור צד שרת, כי אין לך גודל חלון, לנו יש מודול שעושה את זה על סמך user agent בדיוק לא רע, אבל ממש לא טוב
+9/4/17, 18:11 - Nir Weber: זה מה שאני הייתי עושה. (אחרי שהייתי מנסה להמנע משימוש ב-window ללא הצלחה)
+9/4/17, 18:12 - בנימין גרינבוים: באמת שכל חישוב של גודל בJS זה מתכון לכאב ראש ומלא עבודה
+9/4/17, 18:13 - שלומי זק: עדיין לא רואה איך html כפול עדיף על ״חישוב גודל״ בjs
+9/4/17, 18:14 - Nir Weber: אל תיתפס לזה. נתן דוג' קיצונית להמחשה.
+9/4/17, 18:16 - שלומי זק: אבל כל הדיון נסוב סביב מקרי קיצון
+9/4/17, 18:19 - שלומי זק: הרי זה לא שכל הרספונסיביות נעשית על פי חישובי js. הקריאות לclient API הן בודדות מאוד. התחלנו בלהעביר את הקריאות לאיוונטים שבהם הdom קיים בוודאות, והסכמתי. עכשיו ירדנו לעומקם של מקרים בהם הסיטואציה מחייבת קריאה לapi מאיוונט שהdom לא בהכרח קיים בו.
+״הקיצון של הקיצון״
+9/4/17, 18:21 - שלומי זק: פשוט אני לא מסכים עם קביעה של ״אף פעם לא שווה לעשות מדידה בjs״. אני מסכים שזה לא אידאלי, אבל לפעמים זה הפתרון הפחות גרוע *בעיני*.
+אני נתפס לדוגמה שלו לא לצורך הויכוח, אלא בשביל להעשיר את הידע (:
+9/4/17, 18:33 - בנימין גרינבוים: לגמרי עדיף, גם בקוד רגיל
+9/4/17, 18:33 - בנימין גרינבוים: אסור לך ששום רספונסיביות תהיה כפולה, ובלי קשר למה שיהיה לך UI כפול מלכתכילה?
+9/4/17, 18:33 - בנימין גרינבוים: אלא אם כן אתה תומך בדפדפנים בלי flex זה בעיה שלא אמורה להיות לך
+9/4/17, 18:34 - בנימין גרינבוים: אבל גם אם זה כפול - זה עדיין עדיף על לעשות את זה בJS אם אתה רוצה להגיש רנדור צד שרת ולא להראות רע
+9/4/17, 18:41 - דור צ'יזיק: @972542392220 שווה לציין שאני לא הגעתי למצב שאני כל כך לא מסוגל להתאים את הCSS שלי למה שאני רוצה שהייתי חייב לרנדר 2 אלמנטים ולהחביא אחד
+9/4/17, 18:42 - דור צ'יזיק: במיוחד כשיש לך flex, כמעט ואין מקרה שבו אתה לא מסוגל לשנות באופן דרסטי את איך שהאפליקציה שלך כולה נראית בעזרת media query יחסית פשוט
+9/4/17, 18:42 - שלומי זק: בגלל זה בתחילת הדיון ציינתי שאני לא חברת מוצר, וקורה (נדיר אומנם) שיש תכתיבים שלא מאפשרים התאמה בcss
+9/4/17, 18:43 - שלומי זק: אני לגמרי איתך שזה מקרה מאוד מאוד נדיר
+9/4/17, 18:43 - דור צ'יזיק: מה זה אומר שאתה לא חברת מוצר?
+9/4/17, 18:43 - דור צ'יזיק: (שואל מתוך סקרנות, לא ציני)
+9/4/17, 18:44 - שלומי זק: זה אומר שחלק מהעסק שלי עושה פרוייקטים עבור לקוחות
+9/4/17, 18:44 - שלומי זק: ולכן יכולים להיות מקרים של ״זה צריך להיות ככה וזהו״.
+9/4/17, 18:44 - שלומי זק: @972547238288 לא ירדתי לסוף דעתך
+9/4/17, 18:45 - דור צ'יזיק: אתה מתכוון שאתה נכנס לתוך פרוייקטים קיימים של לקוח וכפוף להחלטות הטכניות שלהם?
+9/4/17, 18:48 - שלומי זק: גם, אבל לא רק.
+לדוגמה המקרה הספציפי הנוכחי הוא בפלטפורמה ללקוח, כשאת הui קיבלנו עיצוב והיינו צריכים לבנות ״פיקסל פרפקט״ בעיצוב. אנחנו גם עושים עיצוב אין האוס, אבל במקרה הזה קיבלנו אותו חיצונית, ולא היינו מעורבים בתהליך העיצוב - והבעיה היא שבסופו של יום יש לקוח שיכול להגיד ״לא אכפת לי שזה מעוצב לא נכון, אני רוצה שזה יהיה ככה במובייל וככה בדסקטופ כי ככה אני רוצה״.
+9/4/17, 18:48 - שלומי זק: כמובן הקצנתי פה מאוד, אבל כדי להמחיש וכו׳
+9/4/17, 18:56 - בנימין גרינבוים: Story of my life - זה ככה תמיד 😅
+9/4/17, 18:57 - שלומי זק: זה חלק מהעניין בעיני ☺
+9/7/17, 10:09 - דור צ'יזיק: @972505237338 איך קשר לשם האמיתי שלך רלוונטי?
+9/7/17, 10:10 - דור צ'יזיק: השם האמיתי שלי לא קרוב להיות Madara
+9/7/17, 10:10 - דור צ'יזיק: אני מבטיח לך שאני יכול להוכיח ממש בקלות שהGitHub שלי הוא שלי, ושהSO שלי הוא שלי, וכן כל פרופיל אינטרנטי אחר
+9/7/17, 10:10 - דור צ'יזיק: אולי יש לזה משמעות מסויימת בדפוס פיזי, לא יודע
+9/7/17, 10:10 - דור צ'יזיק: לא רלוונטי באינטרנט.
+9/7/17, 10:26 - שחר אור left
+9/13/17, 08:38 - ניר אברהם: מה הbest practice לניהול שגיאות שבין api לבין צד לקוח?
+חקרתי הרבה וראיתי שנהוג לשלוח בשגיאה איזשהו קוד פנימי שהקליינט יודע לזהות. זה באמת אפקטיבי? לא רוצה לעשות מלא switch case בצד לקוח
+9/13/17, 09:19 - שלומי זק: מה אתה רוצה לעשות עם השגיאות?
+להציג בצד לקוח? לוגים?
+9/13/17, 09:20 - ניר אברהם: להציג בהתאם לכל שגיאה
+9/13/17, 09:21 - ניר אברהם: אם יש לי נגיד בעייה בdb שיציג הודעה קופצת לדוגמא ואם יש שגיאת "שם משתמש או סיסמא שגויים" אז להציג אותו בתחתית הטופס
+9/13/17, 09:23 - שלומי זק: הבנתי
+9/13/17, 09:23 - ניקולאי ריבל: You're mixing two district and very different types of errors, which must be handled differently
+9/13/17, 09:23 - ניקולאי ריבל: Form validation is a logical error which the user needs to know and act upon
+9/13/17, 09:24 - שלומי זק: ניק, הוא מתכוון - עבור שגיאה בdb תראה ״ארעה שגיאה בשרת״
+9/13/17, 09:24 - ניקולאי ריבל: No, he asks about both technical errors and logical ones
+9/13/17, 09:26 - ניקולאי ריבל: Unlike it, a technical error is something you can't foresee since it's a malfunction. Basically when something breaks in an unexpected way
+9/13/17, 09:26 - שלומי זק: אם הבנתי נכון - יש לו api, ועולות שגיאות. הוא רוצה ליידע את הקליינט מה קורה. זו יכולה להיות שגיאת ולידציה וזו יכולה להיות שגיאה בהכנסה לdb וזה יכול להיות גם שגיאה שריסורס לא נמצא
+9/13/17, 09:26 - ניקולאי ריבל: A user can't do anything about a technical error
+9/13/17, 09:26 - שלומי זק: מן הסתם איפה שאתה מנהל את השגיאות צריכה להיות הפרדה בין השגיאות כמו שציינת
+9/13/17, 09:27 - שלומי זק: אבל בשני המקרים הוא רוצה ליידע את המשתמש
+9/13/17, 09:27 - שלומי זק: בין אם המשתמש יכול לעשות משהו ובין אם לאו
+9/13/17, 09:27 - ניר אברהם: נכוו
+9/13/17, 09:27 - ניר אברהם: אז התחלתי למספר את השגיאות ושלוח אותם כדי לנהל בקליינט וזה נראה לי מוזר מאוד
+9/13/17, 09:27 - ישי ויזנר: לא, אין סיבה ליידע את המשתמש בפרטי שגיאות שלא עוזרים לו. זה גם לא נכון מבחינת UX וגם מתכון לבעיות אבטחה.
+9/13/17, 09:28 - שלומי זק: אני לא מסכים
+9/13/17, 09:28 - שלומי זק: זאת אומרת, אני כן מסכים
+9/13/17, 09:28 - שלומי זק: אני לא מסכים שזה שאין למשתמש מה לעשות אומר שלא עוזר לו לדעת מה השגיאה
+9/13/17, 09:29 - ניקולאי ריבל: Yes, the difference is in what you show to the user. A technical error isn't something the user can recover from. The best option is a "retry" feature: "oops, something broke. [Retry button]"
+9/13/17, 09:29 - ניר אברהם: אבל אם יש בעיה בdb אני רוצה לדעת שיש בעיה ומשהו לא עובד. לא אמרתי שאני מציג לו את השם טבלה או משהו חח
+9/13/17, 09:29 - שלומי זק: בדיוק
+9/13/17, 09:29 - שלומי זק: או אפילו קצת יותר מפורט אם המשתמש שלך הוא עם אוריינטציה טכנולוגיה (בודק מוצר למשל)
+9/13/17, 09:29 - ישי ויזנר: בשביל זה יש לוגים. את הלוגים אתה קורא, לא המשתמש.
+9/13/17, 09:30 - שלומי זק: על כל פנים, תנהל את השגיאות בצד אחד
+9/13/17, 09:30 - שלומי זק: אם הapi מנהל את השגיאות, שלח לקליינט את הודעת השגיאה
+9/13/17, 09:31 - ישי ויזנר: בדיוק, ובלי משהו יותר מפורט. ☺
+הוא רק צריך לדעת מה המשמעות לגביו- לנסות שוב, לחכות x זמן, להתייאש ולעבור למתחרים.
+9/13/17, 09:31 - ישי ויזנר: לשלוח מייל לתמיכה הטכנית (או ללחוץ על כפתור שעושה את זה בשבילו)
+9/13/17, 09:31 - שלומי זק: שוב, תלוי במי המשתמש קצה שלך
+9/13/17, 09:32 - שלומי זק: אבל עזוב, זה ניואנסים שלא מעניינים ובטח שלא עוזרים לניר
+9/13/17, 09:32 - ניר אברהם: אני לא שואל מה להציג למשתמש.. אני שואל איך לנהל את השגיאות. האופציה של סתם לשלוח קודים של שגיאה זה הגיוני? לעשות מלא בקליינט switch(code)...?
+9/13/17, 09:33 - שלומי זק: זה אופציה, אבל לא הייתי הולך עליה
+9/13/17, 09:33 - שלומי זק: לקליינט לא אכפת מסוג השגיאה
+9/13/17, 09:33 - שלומי זק: אכפת לו רק מה הוא צריך להציג למשתמש
+9/13/17, 09:33 - שלומי זק: זה מה שאתה רוצה לתת לו
+9/13/17, 09:34 - ניר אברהם: אכפת אם זה "שם משתמש צריך להיות באורך 8 תווים" או אם זה "שם משתמש קיים"
+9/13/17, 09:34 - שלומי זק: למה?
+9/13/17, 09:34 - ניקולאי ריבל: Yup, you send a 500 http code with a body of something like ```{ status: 'error', errors: [{ code: 1, message: 'world exploded' }]}``` and you write error handling once on the client
+9/13/17, 09:34 - ניר אברהם: אחרת איך הוא ידע מה הבעיה
+9/13/17, 09:34 - שלומי זק: הבנתי אותך
+9/13/17, 09:34 - שלומי זק: אז כמו שאמרתי
+9/13/17, 09:34 - ניר אברהם: ככה בדיוק עשיתי
+9/13/17, 09:35 - שלומי זק: הקליינט לא צריך לדעת אם סוג השגיאה הוא ולידציה (שם משתמש באורך 8 תווים) או בהתחברות (שם משתמש לא קיים)
+9/13/17, 09:35 - ניקולאי ריבל: and you just display the message as is, without hard coding anything on the client
+9/13/17, 09:35 - שלומי זק: הוא צריך רק את ההודעה, שלח לו בapi את ההודעה
+9/13/17, 09:36 - ניר אברהם: אבל זה לא מדוייק.. כי אולי שגיאות שונות ארצה להציג במקומות שונים בטופס
+9/13/17, 09:37 - שלומי זק: א׳ נהוג לבצע ולידציה על טופס גם בצד הלקוח (לא במקום צד שרת!!)
+9/13/17, 09:39 - ניקולאי ריבל: exactly: i'd do client side validation with all the details and everything, and if the user still manages to submit invalid data, respond with a single non specific message that validation failed
+9/13/17, 09:39 - ניקולאי ריבל: in other words, rich client, but simple api
+9/13/17, 09:39 - שלומי זק: אם מותר עד 8 תווים בשם משתמש,
+והמשתמש מלא את כל הטופס עם שם משתמש של 9 תווים, אתה לא תתן לו לעבור על כל הטופס, לשלוח אותו, ולקבל חזרה טופס ריק עם הודעת שגיאה שהשם משתמש היה ארוך מידי
+9/13/17, 09:39 - שלומי זק: ככה אנשים שוברים מקלדות
+9/13/17, 09:41 - ניר אברהם: סבבה הבנתי אותכם. שהapi ישלח רק שיש שגיאה ולא מה בדיוק השגיאה כי הצד לקוח כבר יטפל בזה ומי שמנסה לדבר ישירות עם הapi שיתמודד😜
+9/13/17, 09:42 - שלומי זק: כן, רק שהapi ישלח שגיאה עם המידע שרלוונטי למשתמש מן הסתם
+9/13/17, 09:42 - ניר אברהם: כן ברור
+9/13/17, 09:42 - ניר אברהם: אחלה תודה אנשים
+9/13/17, 09:42 - ניר אברהם: אתם באמת פרופשנלס😁
+9/13/17, 09:42 - שלומי זק: 💪🏼
+9/13/17, 09:43 - שלומי זק: אני פה בטעות בכלל
+9/13/17, 09:44 - ניר אברהם: 😂😂
+9/13/17, 09:45 - דניאל חנקין: מבחינת ux, עוזר מאוד גם להוסיף שהצוות הטכני מיודע ו/או קיבל התראה על הבעיה של המשתמש, והוא יתקן אותה. נותן למשתמשים הרגשה שזה זמני
+9/13/17, 10:10 - ניקולאי ריבל: לגמרי, אם קהל היעד של המוצר יחסית טכני. אפשר להחזיר למשתמש מספר שאיתו הוא יוכל לפנות לתמיכה וזה מקושר ללוג של השגיאה ומה הוביל אליה
+9/14/17, 16:19 - ניקולאי ריבל: Ok, here's a good question for this forum: last time I worked with forms was a few years ago and it sucked. I thought that FormData was supposed to fix that and let me serialize forms trivially. I guess I was wrong. Moreover, I tried using the most popular npm package made for this purpose (serialize-form) and it doesn't support modern input types: number, date and likely others. Am I missing something simple? How do I serialize a form in 2017?
+9/14/17, 16:35 - דוד פרנקל: What aspect of formdata let you down?
+9/14/17, 17:21 - ניקולאי ריבל: new FormData(formEl) always returns an empty dataset
+9/14/17, 17:26 - ניקולאי ריבל: [...(new FormData(formEl)).values())] is an empty array, no matter what are the form contents
+9/14/17, 17:27 - ניקולאי ריבל: entries(), not values
+9/14/17, 18:59 - דוד פרנקל: a snippet would help. I use it regularly and it's straightforward. 
+Were the square brackets in "[...(new FormData....values()] intentional? values() returns an iterator, at least on chrome
+9/14/17, 19:07 - ניקולאי ריבל: Right, it's an iterator, which is why you can spread it into an array instead of looping over it
+9/14/17, 19:08 - ניקולאי ריבל: I'll make a codepen or something to reproduce the issue. I'm also on chrome
+9/17/17, 08:38 - גיל תייר left
+9/17/17, 11:27 - אריאל רוזנטל joined using this group's invite link
+9/18/17, 23:47 - ניקולאי ריבל: Following up on my issue: I was the idiot and didn't have ```[name]``` attributes on the form fields. Apparently, a name is required for the input to be serialized (which totally makes sense, doh), but I didn't see in any documentation any mention of it. I also discovered that ```[disabled]``` fields are ignored too. Small codepen to demonstrate the issue and the workaround: https://codepen.io/elektronik/pen/VMLgYX
+9/19/17, 00:26 - דור צ'יזיק: Yes, shame I missed it earlier, I would have told you
+9/19/17, 00:26 - דור צ'יזיק: FormData mimics whatever the browser sends by default when a form is submitted
+9/19/17, 00:26 - דור צ'יזיק: So there're these rules about names and disabled and names that end with `[]` and all that (not that sure about that last one)
+10/2/17, 16:13 - דור צ'יזיק: That moment when professionals is dead for two weeks :(
+10/2/17, 16:14 - דוד חזני: אתה מוזמן לשנות את הסטטוס הזה 😜
+10/2/17, 17:05 - דניאל חנקין: יש פה חבר'ה שכותבים ELM שאפשר לדבר איתם?
+10/2/17, 17:14 - ניר אברהם: יש למישהו כלי טוב לwindows שמזכיר את xscope? כלי שמודד מרחק בין אלמנטים שבתוך הדפדפן?
+10/2/17, 17:14 - ניר אברהם: ניסיתי כבר את ruler, dimension, tape וכולם לא טובים במיוחד...
+10/2/17, 17:18 - רן בר-זיק: סרגל רגיל? 😛
+10/2/17, 17:18 - ניר אברהם: 😰😰
+10/2/17, 17:22 - ניקולאי ריבל: What for?
+10/2/17, 18:47 - ניר אברהם: כדי להיות הכי מדוייק לסקיצה שקיבלתי
+10/2/17, 23:01 - ניקולאי ריבל: אז אני טוען שזו טעות מרה למדוד מימוש של עיצוב. עיצוב מקבלים תמיד בצורה סטטית: תמונה (או כמה) ברזולוציה מסוימת, ב DPI מסוים בגודל viewport מסוים. אך במציאות כל הפרמטרים האלה ואחרים משתנים והעיצוב עדיין צריך להתאים לכל שילוב אפשרי. איזו משמעות יש למדידות פה? רק נא לא לבלבל את זה עם זלזול או חוסר מקצועיות. ההנחיה שעליה סיכמתי עם כל המעורבים בעניין (אנשי מוצר, עיצוב בדיקות מפתחים וראשי צוותים) מראש היא כזו: יש layout גאומטרי לכל דבר (טורים, שורות, ויחסי גדלים בין המרכיבים של הפיצ'ר) שזה מה שחשוב + מספר תמונות סטטיות של מימוש. *לא מודדים* דבר, אלא מבינים את הגיאומטריה של העיצוב ובודקים לפי העין האם בכל מצב נתמך המימוש *נראה מושלם*. אם משהו נראה פחות ממושלם, אפשר להתעמק כדי להבין איפה הבעיה, אך עדיין לא למדוד :)
+10/2/17, 23:08 - ניקולאי ריבל: הבונוס בגישה הזו הוא שכשיושבים עם מעצב מול מימוש (שמן הסתם לא תואם תמונה של עיצוב ב 100%) והמעצב אומר "תגדיל פה, תזיז שם" - אין עם זה שום בעיה כי זה לא סותר משהו סטטי שכולם הסכימו עליו ועכשיו צריך לשנות הכל ולריב עם כולם. מעצב יושב עם מפתח, עושים שינויים בלייב עד שהמעצב מרוצה - מראים את השינויים לקיואיי ופרודאקט. אם אין לאף אחד הסתייגויות - סיימנו בלי בירוקרטיה נוספת
+10/2/17, 23:16 - ניר אברהם: העיצוב שאנחנו מקבלים בעבודה הוא יחסית דינמי ולא תמונה סטטית. הדרישה ממני היא לדייק עד כמה שאפשר ביחס לעיצוב. בין אם אני רוצה או לא אני צריך כלי שיעזור לי למדוד פיקסלים😁
+10/2/17, 23:29 - דניאל חנקין: מה שאתה מדבר עליו, צריך לבוא מהמעצבים, או ממי שמעליהם. לא ראיתי שמפתח אמר למעצב איך לעשות את העבודה שלו, והמעצב אמר, בונא, אולי יש משהו בדבריו.
+10/3/17, 07:30 - ניקולאי ריבל: So at my last work place I was in charge of the front end and I gathered all the stakeholders to discuss my suggested workflow. We agreed to try it and it proved itself very well :)
+10/3/17, 07:31 - ניקולאי ריבל: And I didn't have to fight anyone, since I just outlined the issues we were facing with the standard approach
+10/3/17, 07:44 - Nir Weber: 👏
+10/3/17, 09:43 - דור צ'יזיק: Let's sit on a beer with this? We're facing the same problems now and would like to see how we can improve.
+10/3/17, 09:50 - דור צ'יזיק: Assuming you'd still be within a thousand mile radius from me by the time we can actually meet up
+10/4/17, 13:22 - זאב קלוזנר: שאלה לכל משתמשי ה MAC. יש לי 2 מע' הפעלה על המחשב. המקלדת וה PAD לא עובדים ב MAC OS, רק ב LINUX. מישהו נתקל בדבר כזה?
+10/7/17, 12:48 - אורי טליוסף changed from +972 55-996-2022 to +31 6 17333630
+10/16/17, 09:23 - You added דניאל האוזר
+10/16/17, 23:19 - Nir Weber: <Media omitted>
