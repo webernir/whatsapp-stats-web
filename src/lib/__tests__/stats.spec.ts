@@ -1,6 +1,6 @@
 import * as fs from 'fs'
 import * as path from 'path'
-import * stats from '../stats'
+import * as stats from '../stats'
 
 describe('whatsstats core module', () => {
     let content: string

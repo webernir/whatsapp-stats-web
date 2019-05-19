@@ -1,9 +1,9 @@
-import * as React from "react";
-import "./App.css";
-import Main from "./containers/Main";
-import { Container, Section } from "bloomer";
+import * as React from "react"
+import "./App.css"
+import Main from "./containers/Main"
+import { Container, Section } from "bloomer"
 
-const logo = require("./logo.png");
+const logo = require("./logo.png")
 
 class App extends React.Component {
   render() {
@@ -19,8 +19,8 @@ class App extends React.Component {
           </div>
         </Container>
       </Section>
-    );
+    )
   }
 }
 
-export default App;
+export default App

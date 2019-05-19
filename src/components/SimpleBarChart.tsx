@@ -1,20 +1,20 @@
-import * as React from "react";
+import { Title } from "bloomer"
+import * as React from "react"
 import {
-  BarChart,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
   Bar,
-  ResponsiveContainer
-} from "recharts";
-import { Title } from "bloomer";
+  BarChart,
+  CartesianGrid,
+  Legend,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis
+} from "recharts"
 
 export interface SimpleBarChartProps {
-  title: string;
-  data: any;
-  dataKey: string;
+  title: string
+  data: any
+  dataKey: string
 }
 
 export default class SimpleBarChart extends React.Component<
@@ -22,7 +22,7 @@ export default class SimpleBarChart extends React.Component<
   {}
 > {
   render() {
-    const { data, dataKey, title } = this.props;
+    const { data, dataKey, title } = this.props
     return (
       <div>
         <Title hasTextAlign="centered" isSize={5}>
@@ -44,6 +44,6 @@ export default class SimpleBarChart extends React.Component<
           </BarChart>
         </ResponsiveContainer>
       </div>
-    );
+    )
   }
 }

@@ -1,12 +1,12 @@
-import * as React from "react";
-import { Box, Content } from "bloomer";
+import { Box, Content } from "bloomer"
+import * as React from "react"
 
-export interface InstructionsProps { }
+export interface InstructionsProps {}
 
 export default class Instructions extends React.Component<
   InstructionsProps,
   {}
-  > {
+> {
   render() {
     return (
       <Content>
@@ -32,6 +32,6 @@ export default class Instructions extends React.Component<
           </ol>
         </Box>
       </Content>
-    );
+    )
   }
 }

@@ -1,31 +1,28 @@
-import * as React from "react";
-import { Columns, Column, Box } from "bloomer";
-import { sumBy } from "lodash";
-import FileSelector from "../components/FileSelector";
-import Summary from "../components/Summary";
+import { Box, Column, Columns } from "bloomer"
+import { sumBy } from "lodash"
+import * as moment from "moment"
+import * as React from "react"
+import CountByUser from "../components/CountByUser"
+import FileSelector from "../components/FileSelector"
+import Instructions from "../components/Instructions"
+import SimpleBarChart from "../components/SimpleBarChart"
+import Summary from "../components/Summary"
 import {
-  parseMessages,
-  getCountByUser,
-  splitLines,
-  UserCount,
   getCountByHour,
+  getCountByUser,
   getWordCount,
-  HourCount,
-  Message,
-  WordCount
-} from "../lib/stats";
-import CountByUser from "../components/CountByUser";
-import SimpleBarChart from "../components/SimpleBarChart";
-import Instructions from "../components/Instructions";
-import * as moment from "moment";
+  parseMessages,
+  splitLines
+} from "../lib/stats"
+import { HourCount, Message, UserCount, WordCount } from "../lib/stats.types"
 
 export interface MainProps {}
 export interface MainState {
-  content: string;
-  messages: Message[];
-  countByUser: UserCount[];
-  countByHour: HourCount[];
-  wordCount: WordCount[];
+  content: string
+  messages: Message[]
+  countByUser: UserCount[]
+  countByHour: HourCount[]
+  wordCount: WordCount[]
 }
 
 export default class Main extends React.Component<MainProps, MainState> {
@@ -35,25 +32,25 @@ export default class Main extends React.Component<MainProps, MainState> {
     countByUser: [],
     countByHour: [],
     wordCount: []
-  };
+  }
 
   handleContent = (content: string) => {
-    const messages = parseMessages(content);
+    const messages = parseMessages(content)
     this.setState({
       content,
       messages,
       countByUser: getCountByUser(splitLines(content)),
       countByHour: getCountByHour(messages),
       wordCount: getWordCount(messages)
-    });
-  };
+    })
+  }
 
   render() {
     const firstMessage = moment.min(
       ...this.state.messages
         .filter((t: Message) => t.time.isValid())
         .map((t: Message) => t.time)
-    );
+    )
     return (
       <div>
         <FileSelector onContent={this.handleContent} />
@@ -91,6 +88,6 @@ export default class Main extends React.Component<MainProps, MainState> {
           <Instructions />
         )}
       </div>
-    );
+    )
   }
 }

@@ -1,18 +1,18 @@
-import * as React from "react";
-import { Table } from "bloomer";
-import * as numeral from "numeral";
-import { UserCount } from "../lib/stats";
+import { Table } from "bloomer"
+import * as numeral from "numeral"
+import * as React from "react"
+import { UserCount } from "../lib/stats.types"
 
 export interface CountByUserProps {
-  items: UserCount[];
+  items: UserCount[]
 }
 
 const CountByUserItem = ({
   item,
   rating
 }: {
-  item: UserCount;
-  rating: number;
+  item: UserCount
+  rating: number
 }) => {
   return (
     <tr>
@@ -20,12 +20,12 @@ const CountByUserItem = ({
       <td>{item.name}</td>
       <td>{numeral(item.count).format("0,0")}</td>
     </tr>
-  );
-};
+  )
+}
 
 export default class CountByUser extends React.Component<CountByUserProps, {}> {
   render() {
-    const { items } = this.props;
+    const { items } = this.props
     return (
       <Table isBordered isStriped isNarrow>
         <thead>
@@ -41,6 +41,6 @@ export default class CountByUser extends React.Component<CountByUserProps, {}> {
           ))}
         </tbody>
       </Table>
-    );
+    )
   }
 }
