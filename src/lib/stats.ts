@@ -80,7 +80,7 @@ export function getCountByUser(lines: string[]): UserCount[] {
     .sort((a, b) => b.count - a.count)
 
   const toUserCount = (item: string): UserCount => {
-    const [name, count] = item.split(",")
+    const [name, count] = item.split(/,(?=[^,]+$)/);
     return { name, count: parseInt(count, 10) }
   }
 
